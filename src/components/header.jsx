@@ -1,0 +1,88 @@
+import { NavLink } from "react-router-dom";
+export default function Header() {
+  return (
+    <div>
+      {/* 배너 */}
+      <div className="banner flex justify-center bg-[#23114F]">
+        <a href="/">
+          <img
+            src={`${process.env.PUBLIC_URL}/image/banner.jpg`}
+            alt="banner"
+          />
+        </a>
+      </div>
+
+      {/* 헤더 */}
+      <div className="flex justify-center pt-[30px] pb-[25px] px-40 border-b-[1px]">
+        <div className="w-[86%] flex justify-between">
+          <div className="left flex">
+            <a href="/main" className="flex items-center">
+              <img
+                src={`${process.env.PUBLIC_URL}/image/logo.png`}
+                alt="logo"
+                className="w-[117px] mr-2"
+              />
+            </a>
+            <h1 className="mt-8 tracking-[0.3em] font-extralight text-base text-[#222] flex items-center">
+              DEEP DIVE SPACE
+            </h1>
+          </div>
+
+          <div className="right">
+            <ul className="flex">
+              <div className="flex mr-10">
+                <a href="#" className="flex flex-col justify-center">
+                  <img
+                    src={`${process.env.PUBLIC_URL}/image/hyundaicard.png`}
+                    alt="현대카드"
+                    className="flex items-center w-[140px]"
+                  />
+                </a>
+              </div>
+              <li className="flex flex-col text-center mr-[44px] justify-center">
+                <a href="/login" className="flex justify-center">
+                  <img
+                    src={`${process.env.PUBLIC_URL}/image/login.png`}
+                    alt="로그인"
+                    className="w-[36px]"
+                  />
+                </a>
+                <div className="text-[13px]">로그인</div>
+              </li>
+              <li className="flex flex-col text-center mr-[36px] justify-center">
+                <a href="/joinWelcome" className="flex justify-center">
+                  <img
+                    src={`${process.env.PUBLIC_URL}/image/join.png`}
+                    alt="회원가입"
+                    className="w-[36px]"
+                  />
+                </a>
+                <div className="text-[13px]">회원가입</div>
+              </li>
+              <li className="flex flex-col text-center mr-[40px] justify-center">
+                <a href="#" className="flex justify-center">
+                  <img
+                    src={`${process.env.PUBLIC_URL}/image/member.png`}
+                    alt="마이페이지"
+                    className="w-[36px]"
+                  />
+                </a>
+                <div className="text-[13px]">MY CGV</div>
+              </li>
+              <li className="flex flex-col text-center justify-center">
+                <a href="#" className="flex justify-center">
+                  <img
+                    src={`${process.env.PUBLIC_URL}/image/customer.png`}
+                    alt="고객센터"
+                    className="w-[36px]"
+                  />
+                </a>
+                <div className="text-[13px]">고객센터</div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}

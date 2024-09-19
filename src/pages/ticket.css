@@ -1,0 +1,11 @@
+.sort-link {
+  position: relative;
+  padding-right: 5px;
+}
+
+.sort-link.active {
+  background-image: url("../../public/image/sortmenu_btn_on.png");
+  background-repeat: no-repeat;
+  background-position: center bottom;
+  /* background-size: 50px 30px; adjust size as needed */
+}
