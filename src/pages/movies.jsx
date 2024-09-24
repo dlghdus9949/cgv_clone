@@ -4,16 +4,20 @@ import axios from "axios";
 import { NavLink } from "react-router-dom";
 
 export const IMG_BASE_URL = "https://image.tmdb.org/t/p/w500";
+
 export default function Movies() {
   const [movies, setMovies] = useState([]);
+  const [showNowPlaying, setShowNowPlaying] = useState(false); // 현재 상영중인 영화
 
   useEffect(() => {
     // API 호출 코드
     const fetchMovies = async () => {
+      const url = showNowPlaying
+        ? "https://api.themoviedb.org/3/movie/now_playing"
+        : "https://api.themoviedb.org/3/movie/popular";
       const options = {
         method: "GET",
-        url: "https://api.themoviedb.org/3/movie/popular",
-        // url: "http://8080/movie/popular",
+        url: url,
         params: { language: "ko-kr", page: "1" },
         headers: {
           accept: "application/json",
@@ -25,13 +29,12 @@ export default function Movies() {
       try {
         const response = await axios.request(options);
         setMovies(response.data.results);
-        console.log(response.data.results);
       } catch (error) {
         console.error("API를 불러오지 못했습니다.", error);
       }
     };
     fetchMovies();
-  }, []);
+  }, [showNowPlaying]);
 
   return (
     <div className="w-[996px] my-0 mx-auto">
@@ -55,7 +58,12 @@ export default function Movies() {
             {/* 종류 */}
             <div className="sorting mt-4 flex justify-between">
               <div>
-                <input type="checkbox" className="mr-2" />
+                <input
+                  type="checkbox"
+                  className="mr-2"
+                  checked={showNowPlaying}
+                  onChange={() => setShowNowPlaying(!showNowPlaying)}
+                />
                 <label htmlFor="">현재 상영작만 보기</label>
               </div>
               <div>
@@ -103,7 +111,7 @@ export default function Movies() {
                           <img
                             src={`${IMG_BASE_URL}${movie.poster_path}`}
                             alt={movie.title}
-                            className="mt-2 h-[290px]"
+                            className="mt-2 w-[200px] h-[290px]"
                           />
                         </NavLink>
                         {/* 영화 설명 */}

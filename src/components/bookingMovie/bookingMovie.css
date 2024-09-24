@@ -1,0 +1,32 @@
+.sort-link {
+  position: relative;
+  padding-right: 5px;
+}
+
+.sort-link.active {
+  background-image: url("../../../public/image/sortmenu_btn_on.png");
+  background-repeat: no-repeat;
+  background-position: center bottom;
+  /* background-size: 50px 30px; adjust size as needed */
+}
+
+.morning {
+  display: inline-block;
+  height: 14px;
+  padding-left: 22px; /* 이미지 너비에 따라 적절한 패딩 설정 */
+  line-height: 14px; /* 텍스트와 이미지 높이 맞춤 */
+  background: url(../../../public/image/icon_morning_night.png) no-repeat left
+    center;
+  background-position: 0 0;
+}
+
+.night {
+  display: inline-block;
+  height: 14px;
+  padding-left: 22px; /* 이미지 너비에 따라 적절한 패딩 설정 */
+  margin-left: 14px;
+  line-height: 14px; /* 텍스트와 이미지 높이 맞춤 */
+  background: url(../../../public/image/icon_morning_night.png) no-repeat left
+    center;
+  background-position: 0 -20px;
+}

@@ -16,7 +16,7 @@ export default function Header() {
       <div className="flex justify-center pt-[30px] pb-[25px] px-40 border-b-[1px]">
         <div className="w-[86%] flex justify-between">
           <div className="left flex">
-            <a href="/main" className="flex items-center">
+            <a href="/" className="flex items-center">
               <img
                 src={`${process.env.PUBLIC_URL}/image/logo.png`}
                 alt="logo"
