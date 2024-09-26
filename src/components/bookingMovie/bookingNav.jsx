@@ -1,6 +1,6 @@
 export default function BookingNav() {
   return (
-    <div>
+    <div className="w-[996px] my-0 mx-auto">
       <div className="nav items-center space-x-2">
         <div className="mt-[30px] flex justify-end space-x-1">
           <a

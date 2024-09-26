@@ -36,7 +36,12 @@ export default function BookingDate({ onDateSelect }) {
 
   // 날짜 클릭 시 상태 업데이트
   const handleDateClick = (date) => {
+    console.log("선택된 날짜:", date.toLocaleDateString()); // 추가된 로그
+
     setSelectDate(date);
+    if (onDateSelect) {
+      onDateSelect(date); // 여기서 부모 컴포넌트로 전달됨
+    }
   };
 
   return (
@@ -94,10 +99,10 @@ export default function BookingDate({ onDateSelect }) {
                       className={`date-item flex justify-center py-2 cursor-pointer transition-all duration-300 ${
                         isSelected ? "bg-[#333333] w-[60%] text-[#fff]" : ""
                       }`}
-                      onClick={() => handleDateClick(date)}
                     >
                       {/* 요일과 날짜를 요일 먼저, 날짜 나중에 표시 */}
                       <span
+                        onClick={() => handleDateClick(date)}
                         className={`font-bold ${
                           isSelected ? "text-[#fff]" : ""
                         }`}

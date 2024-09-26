@@ -193,14 +193,14 @@ export default function Login() {
                                 <td className="p-2 border-r">
                                   수집일로부터 5년
                                 </td>
-                                <td className="p-2 border-r flex flex-col text-center pt-4">
-                                  <span>
+                                <td className="p-2 border-r flex flex-col pt-4">
+                                  <span className="flex">
                                     <input type="radio" />
-                                    <label>동의함</label>
+                                    <label className="ml-1">동의함</label>
                                   </span>
-                                  <span>
+                                  <span className="flex">
                                     <input type="radio" />
-                                    <label>동의 안함</label>
+                                    <label className="ml-1">동의 안함</label>
                                   </span>
                                 </td>
                               </tr>

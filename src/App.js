@@ -4,6 +4,7 @@ import Nav from "./components/nav";
 import Footer from "../src/components/footer";
 import FixedBtn from "./components/fixedBtn";
 import BookingLayout from "./components/bookingMovie/bookingLayout";
+import BookingSeat from "./components/bookingMovie/bookingSeat";
 
 import Main from "./pages/main";
 import Login from "./pages/login";
@@ -29,6 +30,7 @@ function App() {
           <Route path="/ticket" element={<BookingLayout />} />
           <Route path="/theaters" element={<Theaters />} />
           <Route path="/movieDetail/:id" element={<MovieDetail />} />
+          <Route path="/bookingSeat" element={<BookingSeat />} />
         </Routes>
       </BrowserRouter>
       <FixedBtn />

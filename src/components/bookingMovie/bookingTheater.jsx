@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export default function BookingTheater() {
+export default function BookingTheater({ onTheaterSelect }) {
   // 지역과 세부극장 데이터를 관리하는 상태
   const [selectedArea, setSelectedArea] = useState(null);
   const [selectedTheater, setSelectedTheater] = useState(null);
@@ -249,6 +249,13 @@ export default function BookingTheater() {
     setSelectedTheater(null); // 세부극장 선택 초기화
   };
 
+  const handleTheaterClick = (theater) => {
+    setSelectedTheater(theater);
+    if (onTheaterSelect) {
+      onTheaterSelect(theater); // 선택된 극장을 부모 컴포넌트로 전달
+    }
+  };
+
   return (
     <div className="border-y-2">
       {/* 극장 */}
@@ -324,7 +331,7 @@ export default function BookingTheater() {
                   key={region.name}
                   className="overflow-hidden float-left w-[100%] h-[31px] leading-[31px] mb-[1px]"
                 >
-                  <a
+                  <a5
                     href="#"
                     onClick={() => handleAreaClick(region.name)}
                     className={`block text-[#333] text-[12px] -tracking-[.1em] text-right text-ellipsis pl-[6px] pr-[8px] bg-[#e6e4d9] ${
@@ -333,7 +340,7 @@ export default function BookingTheater() {
                   >
                     <span className="name">{region.name}</span>
                     <span className="count">({region.theaters.length})</span>
-                  </a>
+                  </a5>
                 </li>
               ))}
             </ul>
@@ -352,13 +359,12 @@ export default function BookingTheater() {
                     >
                       <a
                         href="#"
-                        className={`block text-[12px] font-bold whitespace-nowrap text-ellipsis overflow-hidden px-[7px] 
-                          ${
-                            selectedTheater === theater
-                              ? "bg-[#333] text-white"
-                              : "text-[#333]"
-                          }`}
-                        onClick={() => setSelectedTheater(theater)}
+                        className={`block text-[12px] font-bold px-[7px] ${
+                          selectedTheater === theater
+                            ? "bg-[#333] text-white"
+                            : "text-[#333]"
+                        }`}
+                        onClick={() => handleTheaterClick(theater)} // 극장 클릭 시 호출
                       >
                         {theater}
                       </a>
