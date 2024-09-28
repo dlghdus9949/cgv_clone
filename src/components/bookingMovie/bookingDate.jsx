@@ -96,7 +96,7 @@ export default function BookingDate({ onDateSelect }) {
                   return (
                     <div
                       key={index}
-                      className={`date-item flex justify-center py-2 cursor-pointer transition-all duration-300 ${
+                      className={`date-item flex justify-center w-[60%] py-2 cursor-pointer transition-all duration-300 ${
                         isSelected ? "bg-[#333333] w-[60%] text-[#fff]" : ""
                       }`}
                     >

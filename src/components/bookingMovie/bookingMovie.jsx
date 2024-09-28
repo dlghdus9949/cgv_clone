@@ -32,7 +32,7 @@ export default function BookingMovie() {
     <div className="border-2">
       {/* 영화 */}
       <div className="section1 w-[285px]">
-        <div className="head bg-[#333]  flex justify-center">
+        <div className="head bg-[#333] flex justify-center">
           <h3 className="text-[#fff] font-bold">영화</h3>
         </div>
         <div className="body mt-[12px]">

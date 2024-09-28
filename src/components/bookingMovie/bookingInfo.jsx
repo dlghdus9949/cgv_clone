@@ -1,5 +1,6 @@
 import React from "react";
 import "./bookingMovie.css";
+import { useNavigate } from "react-router";
 
 export default function BookingInfo({
   selectedMovie,
@@ -8,6 +9,18 @@ export default function BookingInfo({
   selectedTime,
 }) {
   const isSelected = selectedTheater || selectedDate || selectedTime;
+  const navigate = useNavigate();
+
+  const onClickSeat = () => {
+    navigate(`/bookingSeat`, {
+      state: {
+        selectedMovie,
+        selectedDate,
+        selectedTheater,
+        selectedTime,
+      },
+    });
+  };
 
   return (
     <div className="bg-[#1d1d1c] w-full h-[128px] flex items-center">
@@ -52,13 +65,12 @@ export default function BookingInfo({
           )}
 
           {/* 좌석 선택 및 결제 */}
-
           <p className="text-[#999] text-[22px] font-bold">좌석선택</p>
 
           <p className="text-[#999] text-[22px] font-bold">결제</p>
         </div>
         {/* right */}
-        <div className="btn_img"></div>
+        <div className="btn_img" onClick={onClickSeat}></div>
       </div>
     </div>
   );

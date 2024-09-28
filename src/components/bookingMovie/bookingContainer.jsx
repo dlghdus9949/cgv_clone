@@ -20,13 +20,17 @@ export default function BookingContainer() {
     setSelectedTheater(theater); // 선택된 극장 저장
   };
 
+  const handleTimeSelect = (time) => {
+    setSelectedTime(time);
+  };
+
   return (
     <div className="w-full flex flex-col items-center">
       <div className="w-[996px] flex justify-center bg-[#F2F0E4] mt-[20px]">
         <BookingMovie onMovieSelec={setSelectedMovie} />
-        <BookingTheater onTheaterSelect={setSelectedTheater} />
+        <BookingTheater onTheaterSelect={handleTheaterSelect} />
         <BookingDate onDateSelect={handleDateSelect} />
-        <BookingTime onTimeSelect={setSelectedTime} />
+        <BookingTime onTimeSelect={handleTimeSelect} />
       </div>
       <div className="w-full">
         <BookingInfo
