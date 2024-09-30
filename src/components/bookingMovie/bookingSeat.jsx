@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import BookingInfo from "./bookingInfo";
 import BookingNav from "./bookingNav";
 import { useLocation } from "react-router-dom";
+import { BookingContext } from "./bookingContext";
 
 const rows = [
   "A",
@@ -22,22 +23,64 @@ const rows = [
 const seatsPerRow = 13;
 
 export default function BookingSeat() {
+  const buttonImage = `${process.env.PUBLIC_URL}/image/tnb_buttons.png`;
+
+  const {
+    selectedMovie,
+    selectedDate,
+    selectedTheater,
+    selectedTime,
+    setSelectedSeats,
+    selections,
+    setSelections,
+  } = useContext(BookingContext);
+
   const [seats, setSeats] = useState(
-    Array(rows.length)
+    Array(14)
       .fill()
-      .map(() => Array(seatsPerRow).fill(false))
+      .map(() => Array(13).fill(false))
   );
   const [selectedCount, setSelectedCount] = useState(0);
-
   // 인원 상태 (일반, 청소년, 경로, 우대) 및 좌석 수 제한 계산
-  const [selections, setSelections] = useState({
-    일반: 0,
-    청소년: 0,
-    경로: 0,
-    우대: 0,
-  });
+  // const [selections, setSelections] = useState({
+  //   일반: 0,
+  //   청소년: 0,
+  //   경로: 0,
+  //   우대: 0,
+  // });
 
-  const totalSelected = Object.values(selections).reduce((a, b) => a + b, 0); // 총 인원 계산
+  // 총 인원 계산
+  const totalSelected = Object.values(selections).reduce((a, b) => a + b, 0);
+
+  // 인원 선택 처리
+  const handleSelection = (category, value) => {
+    const currentTotal = Object.values(selections).reduce((a, b) => a + b, 0);
+    if (currentTotal + (value - selections[category]) > 8) return; // 최대 8명까지 가능
+    setSelections({
+      ...selections,
+      [category]: value,
+    });
+  };
+
+  // 페이지 이동 후에도 상태 유지 (localStorage 사용)
+  useEffect(() => {
+    const savedSeats = JSON.parse(localStorage.getItem("seats"));
+    const savedSelections = JSON.parse(localStorage.getItem("selections"));
+
+    // console.log("Loaded seats from localStorage: ", savedSeats);
+    // console.log("Loaded selections from localStorage: ", savedSelections);
+
+    if (savedSeats) setSeats(savedSeats);
+    if (savedSelections) setSelections(savedSelections);
+  }, []);
+
+  useEffect(() => {
+    // console.log("Saving seats to localStorage: ", seats);
+    // console.log("Saving selections to localStorage: ", selections);
+
+    localStorage.setItem("seats", JSON.stringify(seats));
+    localStorage.setItem("selections", JSON.stringify(selections));
+  }, [seats, selections]);
 
   const toggleSeat = (rowIndex, seatIndex) => {
     // 인원 제한
@@ -52,17 +95,26 @@ export default function BookingSeat() {
     setSelectedCount(
       newSeats[rowIndex][seatIndex] ? selectedCount + 1 : selectedCount - 1
     );
+
+    // 선택된 좌석 정보 업데이트
+    const selectedSeatInfo = [];
+    newSeats.forEach((row, rowIdx) => {
+      row.forEach((seat, seatIdx) => {
+        if (seat) selectedSeatInfo.push(`${rows[rowIdx]}${seatIdx + 1}`);
+      });
+    });
+    setSelectedSeats(selectedSeatInfo);
   };
 
-  // 인원 선택 처리
-  const handleSelection = (category, value) => {
-    const currentTotal = Object.values(selections).reduce((a, b) => a + b, 0);
-    if (currentTotal + (value - selections[category]) > 8) return; // 최대 8명까지 가능
-    setSelections({
-      ...selections,
-      [category]: value,
-    });
-  };
+  // // 인원 선택 처리
+  // const handleSelection = (category, value) => {
+  //   const currentTotal = Object.values(selections).reduce((a, b) => a + b, 0);
+  //   if (currentTotal + (value - selections[category]) > 8) return; // 최대 8명까지 가능
+  //   setSelections({
+  //     ...selections,
+  //     [category]: value,
+  //   });
+  // };
 
   // 각 카테고리별 인원 선택 버튼 생성
   const renderButtons = (category) => {
@@ -87,10 +139,6 @@ export default function BookingSeat() {
       </ul>
     );
   };
-
-  const location = useLocation();
-  const { selectedMovie, selectedDate, selectedTheater, selectedTime } =
-    location.state || {};
 
   return (
     <div className="flex text-left flex-col items-center">

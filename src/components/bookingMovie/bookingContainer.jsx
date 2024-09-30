@@ -1,23 +1,29 @@
-// BookingContainer.jsx
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import BookingMovie from "./bookingMovie";
 import BookingDate from "./bookingDate";
 import BookingTheater from "./bookingTheater";
 import BookingTime from "./bookingTime";
 import BookingInfo from "./bookingInfo";
+import { BookingContext } from "./bookingContext";
 
 export default function BookingContainer() {
-  const [selectedMovie, setSelectedMovie] = useState(null);
-  const [selectedDate, setSelectedDate] = useState(null);
-  const [selectedTheater, setSelectedTheater] = useState(null);
-  const [selectedTime, setSelectedTime] = useState(null);
+  const {
+    selectedMovie,
+    setSelectedMovie,
+    selectedDate,
+    setSelectedDate,
+    selectedTheater,
+    setSelectedTheater,
+    selectedTime,
+    setSelectedTime,
+  } = useContext(BookingContext);
 
   const handleDateSelect = (date) => {
     setSelectedDate(date);
   };
 
   const handleTheaterSelect = (theater) => {
-    setSelectedTheater(theater); // 선택된 극장 저장
+    setSelectedTheater(theater);
   };
 
   const handleTimeSelect = (time) => {
