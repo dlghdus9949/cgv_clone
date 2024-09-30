@@ -39,3 +39,26 @@
   width: 106px;
   height: 108px;
 }
+
+/* bookingDefault.jsx */
+.refresh {
+  background: url(../../../public/image/step_refresh_btn.png) no-repeat 100% 50%;
+}
+
+/* bookingDefault.jsx */
+.discount-list > ul > li > a {
+  display: block; /* 블록 요소로 설정 */
+  line-height: 31px;
+  height: 28px; /* 높이 설정 */
+  text-decoration: none; /* 밑줄 제거 */
+  padding-left: 14px; /* 왼쪽 패딩 설정 */
+  color: #333; /* 글자 색상 설정 */
+  font-size: 12px; /* 글자 크기 설정 */
+  font-weight: bold; /* 글자 두께 설정 */
+  background: url(../../../public/image/step3_bullets.png) no-repeat 170px -171px; /* 이미지 배경 설정 */
+}
+
+.discount-form > div > div h5 {
+  background: url(../../../public/image/step3_bullets.png) no-repeat 0 -259px;
+  text-indent: 11px;
+}

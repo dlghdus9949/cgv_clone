@@ -44,6 +44,7 @@ export default function BookingContainer() {
           selectedDate={selectedDate}
           selectedTheater={selectedTheater}
           selectedTime={selectedTime}
+          navigateTo="/bookingSeat"
         />
       </div>
     </div>

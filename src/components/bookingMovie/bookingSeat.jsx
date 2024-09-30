@@ -259,6 +259,7 @@ export default function BookingSeat() {
           selectedDate={selectedDate}
           selectedTheater={selectedTheater}
           selectedTime={selectedTime}
+          navigateTo="/bookingDefault"
         />
       </div>
     </div>
