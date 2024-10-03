@@ -16,6 +16,7 @@ export const BookingProvider = ({ children }) => {
     경로: 0,
     우대: 0,
   });
+  const [totalAmount, setTotalAmount] = useState(0);
 
   return (
     <BookingContext.Provider
@@ -32,6 +33,8 @@ export const BookingProvider = ({ children }) => {
         setSelectedSeats,
         selections,
         setSelections,
+        totalAmount,
+        setTotalAmount,
       }}
     >
       {children}

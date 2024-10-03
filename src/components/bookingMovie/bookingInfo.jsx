@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router";
 import { BookingContext } from "./bookingContext";
 
@@ -11,6 +11,8 @@ export default function BookingInfo({ navigateTo }) {
     selectedTime,
     selectedSeats,
     selections,
+    totalAmount,
+    setTotalAmount,
   } = useContext(BookingContext);
 
   const isSelectedTheater = selectedTheater;
@@ -35,11 +37,15 @@ export default function BookingInfo({ navigateTo }) {
     우대: 10000,
   };
 
-  const totalAmount =
-    selections.일반 * prices.일반 +
-    selections.청소년 * prices.청소년 +
-    selections.경로 * prices.경로 +
-    selections.우대 * prices.우대;
+  useEffect(() => {
+    const calculatedAmount =
+      selections.일반 * prices.일반 +
+      selections.청소년 * prices.청소년 +
+      selections.경로 * prices.경로 +
+      selections.우대 * prices.우대;
+
+    setTotalAmount(calculatedAmount); // 계산된 totalAmount 저장
+  }, [selections]);
 
   // 클릭 핸들러
   const onClickSeat = () => {

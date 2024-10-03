@@ -30,6 +30,7 @@ export default function BookingSeat() {
     selectedDate,
     selectedTheater,
     selectedTime,
+    selectedSeats,
     setSelectedSeats,
     selections,
     setSelections,
@@ -259,6 +260,7 @@ export default function BookingSeat() {
           selectedDate={selectedDate}
           selectedTheater={selectedTheater}
           selectedTime={selectedTime}
+          selectedSeats={selectedSeats}
           navigateTo="/bookingDefault"
         />
       </div>
