@@ -3,9 +3,11 @@ import { useNavigate, useLocation } from "react-router";
 import { BookingContext } from "./bookingContext";
 
 export default function BookingInfo({ navigateTo }) {
+  const IMG_BASE_URL = "https://image.tmdb.org/t/p/w500";
   const buttonImage = `${process.env.PUBLIC_URL}/image/tnb_buttons.png`;
   const {
     selectedMovie,
+    posterPath,
     selectedDate,
     selectedTheater,
     selectedTime,
@@ -15,6 +17,7 @@ export default function BookingInfo({ navigateTo }) {
     setTotalAmount,
   } = useContext(BookingContext);
 
+  const isSelectedMovie = selectedMovie && posterPath;
   const isSelectedTheater = selectedTheater;
   const isSelectedSeats = selectedSeats.length > 0;
   const isSelectedPeople = Object.values(selections).some((count) => count > 0);
@@ -84,6 +87,8 @@ export default function BookingInfo({ navigateTo }) {
     isRedArrow = true;
   } else if (location.pathname === "/bookingSeat") {
     backgroundPosition = "0 -330px"; // 결제선택 (회색 화살표)
+  } else if (location.pathname === "/bookingDefault") {
+    backgroundPosition = "0 -550px";
   }
 
   return (
@@ -92,21 +97,29 @@ export default function BookingInfo({ navigateTo }) {
         {/* left */}
         <div className="flex w-[700px] justify-between items-center ml-4">
           {/* 영화 선택 */}
-          <p
-            className={
-              selectedMovie
-                ? "text-[#fff]"
-                : "text-[#999] text-[22px] font-bold"
-            }
-          >
-            {selectedMovie ? selectedMovie : "영화선택"}
-          </p>
+          {isSelectedMovie ? (
+            <div className="flex w-[175px]">
+              <img
+                src={`${IMG_BASE_URL}${posterPath}`}
+                alt={selectedMovie}
+                className="w-[70px] h-auto object-cover mr-2"
+              />
+              <p className="text-[#fff] text-[14px] pt-2 font-extrabold flex align-start">
+                {selectedMovie}
+              </p>
+            </div>
+          ) : (
+            <>
+              {/* 영화가 선택되지 않았을 때 기본 텍스트 표시 */}
+              <p className="text-[#999] text-[22px] font-bold">영화선택</p>
+            </>
+          )}
 
           {/* 극장, 날짜, 시간 선택 상태에 따라 다른 텍스트 표시 */}
           {!isSelectedTheater ? (
             <p className="text-[#999] text-[22px] font-bold">극장선택</p>
           ) : (
-            <div className="text-[#fff] text-[14px]">
+            <div className="text-[#fff] text-[14px] ">
               <p>
                 극장
                 <span className="font-extrabold ml-2">
@@ -154,7 +167,7 @@ export default function BookingInfo({ navigateTo }) {
           )}
 
           {!isSelectedSeats || !isSelectedPeople ? (
-            <p className="text-[#999] text-[22px] font-bold">결제</p>
+            <p className="text-[#999] text-[22px] font-bold mr-8">결제</p>
           ) : (
             <div className="text-[#fff] text-[14px]">
               <p className="font-extrabold">
@@ -181,7 +194,7 @@ export default function BookingInfo({ navigateTo }) {
             backgroundPosition: backgroundPosition, // 선택 상태에 따라 backgroundPosition 변경
             overflow: "hidden",
             textIndent: "-1000px",
-            width: "106px",
+            width: location.pathname === "/bookingDefault" ? "220px" : "106px",
             height: "108px",
             cursor: isRedArrow ? "pointer" : "default", // 빨간색 화살표일 때만 클릭 가능하도록
           }}

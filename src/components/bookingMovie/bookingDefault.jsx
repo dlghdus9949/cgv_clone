@@ -1,6 +1,6 @@
 import BookingNav from "./bookingNav";
 import FixedBtn from "../fixedBtn";
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext, useEffect, useRef } from "react";
 import "./bookingMovie.css";
 import BookingInfo from "./bookingInfo";
 import { BookingContext } from "./bookingContext";
@@ -46,11 +46,42 @@ export default function BookingDefault() {
   };
 
   // 스크롤
+  // const [scrollPosition, setScrollPosition] = useState(0);
+  // const handleScroll = () => {
+  //   const position = window.pageYOffset;
+  //   setScrollPosition(position);
+  // };
+  // useEffect(() => {
+  //   window.addEventListener("scroll", handleScroll);
+  //   return () => {
+  //     window.removeEventListener("scroll", handleScroll);
+  //   };
+  // }, []);
+  // 스크롤 범위를 제한하는 값 설정 (예: 100px 이상, 500px 이하로 제한)
   const [scrollPosition, setScrollPosition] = useState(0);
+  const containerRef = useRef(null); // div에 대한 참조 생성
+
   const handleScroll = () => {
     const position = window.pageYOffset;
-    setScrollPosition(position);
+    const slowPosition = position * 0.5;
+
+    // div의 높이 계산
+    const containerHeight = containerRef.current
+      ? containerRef.current.offsetHeight
+      : 0;
+
+    // 스크롤 범위를 100px에서 div 높이 - 130px으로 제한
+    const maxScroll = containerHeight - 550; // div보다 550px 작게
+
+    if (slowPosition >= 0 && slowPosition <= maxScroll) {
+      setScrollPosition(slowPosition);
+    } else if (slowPosition < 100) {
+      setScrollPosition(0); // 최소값 설정
+    } else if (slowPosition > maxScroll) {
+      setScrollPosition(maxScroll); // 최대값 설정
+    }
   };
+
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
     return () => {
@@ -62,7 +93,10 @@ export default function BookingDefault() {
     <div className="flex flex-col items-center">
       <BookingNav />
       <div className="w-[996px] bg-[#F2F0E4] mt-4">
-        <div className="ticketPayment float-left w-[774px] min-h-[600px]">
+        <div
+          className="ticketPayment float-left w-[774px] min-h-[600px]"
+          ref={containerRef}
+        >
           {/* STEP 1 */}
           <div className="w-[744px] mt-[5px] mb-[30px]">
             <div className="h-[33px] leading-[33px] text-[#e0e0e0] bg-[#333] flex justify-between mb-[3px]">
@@ -1499,7 +1533,7 @@ export default function BookingDefault() {
           <div className="w-[744px] mt-[5px] mb-[30px]">
             <div className="h-[33px] leading-[33px] text-[#e0e0e0] bg-[#333] flex justify-between mb-[3px]">
               <h2 className="h-[100%] text-[17px] font-extrabold flex items-center ml-4">
-                STEP 4.
+                STEP 4. 최종결제수단
               </h2>
               <a href="#" className="refresh mr-[12px] pr-[24px]">
                 <span className="text-[#e6e6e6] text-[12px] font-extrabold">
@@ -1566,12 +1600,12 @@ export default function BookingDefault() {
                 {selectedPaymentMethod === "신용카드" && (
                   <div>
                     <div className="flex">
-                      <div className="px-[15px] ml-8 w-[500px]">
+                      <div className="px-[15px] ml-8 w-[500px] text-[12px]">
                         <span>카드종류</span>
                         <select
                           name="cardType"
                           id="cardType"
-                          className="h-[30px] bg-transparent border border-[#666] ml-2 px-2"
+                          className="h-[25px] bg-transparent border border-[#666] ml-2 px-2"
                         >
                           <option
                             value="visa"
@@ -1581,13 +1615,20 @@ export default function BookingDefault() {
                           >
                             카드를 선택하세요
                           </option>
-                          <option value="visa">Visa</option>
-                          <option value="visa">Visa</option>
-                          <option value="visa">Visa</option>
-                          <option value="visa">Visa</option>
-                          <option value="visa">Visa</option>
-                          <option value="mastercard">MasterCard</option>
-                          <option value="amex">American Express</option>
+                          <option value="">BC카드</option>
+                          <option value="">현대카드</option>
+                          <option value="">하나카드</option>
+                          <option value="">삼성카드</option>
+                          <option value="">신한카드</option>
+                          <option value="">KB국민카드</option>
+                          <option value="">카카오뱅크카드</option>
+                          <option value="">NH카드</option>
+                          <option value="">스탠다드차타드은행카드</option>
+                          <option value="">씨티카드</option>
+                          <option value="">롯데/아멕스카드</option>
+                          <option value="">K뱅크</option>
+                          <option value="">우리카드</option>
+                          <option value="">코나카드</option>
                         </select>
                       </div>
                       {/* 광고 */}
@@ -1933,7 +1974,13 @@ export default function BookingDefault() {
                     </div>
                   </div>
                 )}
-                {selectedPaymentMethod === "" && <p>결제 방식을 선택하세요.</p>}
+                {selectedPaymentMethod === "" && (
+                  <div className="flex flex-col">
+                    <div className="my-0 mx-auto text-[12px] p-[18px] mt-2">
+                      결제 방식을 선택하세요
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           </div>

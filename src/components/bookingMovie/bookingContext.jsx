@@ -6,6 +6,7 @@ export const BookingContext = createContext();
 // Context Provider 컴포넌트
 export const BookingProvider = ({ children }) => {
   const [selectedMovie, setSelectedMovie] = useState(null);
+  const [posterPath, setPosterPath] = useState(null);
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedTheater, setSelectedTheater] = useState(null);
   const [selectedTime, setSelectedTime] = useState(null);
@@ -21,6 +22,8 @@ export const BookingProvider = ({ children }) => {
   return (
     <BookingContext.Provider
       value={{
+        posterPath,
+        setPosterPath,
         selectedMovie,
         setSelectedMovie,
         selectedDate,

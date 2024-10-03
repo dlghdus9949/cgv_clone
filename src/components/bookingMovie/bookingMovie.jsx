@@ -2,32 +2,59 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 import axios from "axios";
 import "./bookingMovie.css";
+import { useContext } from "react";
+import { BookingContext } from "./bookingContext"; // BookingContext 불러오기
+export const IMG_BASE_URL = "https://image.tmdb.org/t/p/w500";
 
-export default function BookingMovie() {
+export default function BookingMovie({ onMovieSelect }) {
   const [movies, setMovies] = useState([]); // 영화 목록을 저장할 상태
   const [loading, setLoading] = useState(true); // 로딩 상태 관리
   const [error, setError] = useState(null); // 에러 상태 관리
   const [activeSort, setActiveSort] = useState("예매율순"); // 정렬 방식 상태 관리
+  const [selectedMovieId, setSelectedMovieId] = useState(null); // 선택된 영화 ID 상태
 
-  // api 불러오기
+  const navigate = useNavigate(); // 페이지 이동을 위한 navigate
+
+  const { setSelectedMovie, setPosterPath } = useContext(BookingContext);
+
+  // API 불러오기
   useEffect(() => {
-    // API 호출
-    axios
-      .get("http://localhost:8080/movies/latest")
-      .then((response) => {
-        setMovies(response.data); // 영화 데이터를 상태에 저장
+    const fetchMovies = async () => {
+      const options = {
+        method: "GET",
+        url: "https://api.themoviedb.org/3/movie/popular",
+        params: { language: "ko-kr", page: "1" },
+        headers: {
+          accept: "application/json",
+          Authorization:
+            "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxYjU5MmMzNGIyMDU5NTVjZDM2M2YzMGRiYzM5YjljMiIsIm5iZiI6MTcyMDY3NDkyMy42NjIwNzUsInN1YiI6IjY2OGY2OGY3MmI3NWQ5MDIwZWU2ZWExOSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.fK5NfoFsZr7QM0m1mYQ2tiTkkbBpDO1R6Thm_W7CTX8",
+        },
+      };
+
+      try {
+        const response = await axios.request(options);
+        setMovies(response.data.results); // 영화 데이터를 상태에 저장
         setLoading(false); // 로딩 완료
-      })
-      .catch((error) => {
-        console.error("Error fetching movies:", error);
+      } catch (error) {
+        console.error("API를 불러오지 못했습니다.", error);
         setError("영화를 불러오는데 문제가 발생했습니다."); // 에러 처리
         setLoading(false); // 로딩 완료
-      });
+      }
+    };
+
+    fetchMovies();
   }, []);
 
   const handleSortClick = (sortType) => {
     setActiveSort(sortType);
   };
+
+  const handleMovieClick = (id, title, poster_path) => {
+    setSelectedMovieId(id); // 선택된 영화 ID를 상태에 저장
+    setSelectedMovie(title); // 선택된 영화 제목을 BookingContext에 저장
+    setPosterPath(poster_path); // 선택된 영화 포스터 경로를 BookingContext에 저장
+  };
+
   return (
     <div className="border-2">
       {/* 영화 */}
@@ -111,15 +138,35 @@ export default function BookingMovie() {
               </a>
             </div>
 
-            <div className="movie_list">
+            <div className="movie_list mx-[25px] mt-[5px] pb-[2px]">
               {loading ? (
                 <p>영화 데이터를 불러오는 중...</p>
               ) : error ? (
                 <p>{error}</p>
               ) : (
                 movies.map((movie) => (
-                  <div key={movie.id} className="movie-item">
-                    {movie.title}
+                  <div>
+                    <img
+                      src={`${IMG_BASE_URL}${movie.poster_path}`}
+                      alt={movie.title}
+                      className="w-0 h-0 object-cover shadow-xl"
+                    />
+                    <div
+                      className={`text-[#333] text-[12px] font-bold px-[7px] py-1 cursor-pointer transition-all duration-300r ${
+                        selectedMovieId === movie.id
+                          ? "bg-[#333] text-white" // 선택된 영화의 배경색 및 텍스트 색상
+                          : ""
+                      }`}
+                      onClick={() =>
+                        handleMovieClick(
+                          movie.id,
+                          movie.title,
+                          movie.poster_path
+                        )
+                      }
+                    >
+                      {movie.title}
+                    </div>
                   </div>
                 ))
               )}

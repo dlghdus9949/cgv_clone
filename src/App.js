@@ -30,7 +30,6 @@ function App() {
             <Route path="/joinWelcome" element={<JoinWelcome />} />
             <Route path="/join" element={<Join />} />
             <Route path="/movies" element={<Movies />} />
-            {/* <Route path="/ticket" element={<Ticket />} /> */}
             <Route path="/theaters" element={<Theaters />} />
             <Route path="/movieDetail/:id" element={<MovieDetail />} />
             <Route path="/ticket" element={<BookingLayout />} />

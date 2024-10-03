@@ -10,6 +10,8 @@ export default function BookingContainer() {
   const {
     selectedMovie,
     setSelectedMovie,
+    posterPath,
+    setPosterPath,
     selectedDate,
     setSelectedDate,
     selectedTheater,
@@ -17,6 +19,10 @@ export default function BookingContainer() {
     selectedTime,
     setSelectedTime,
   } = useContext(BookingContext);
+
+  const handleMovieSelect = (title, posterPath) => {
+    setSelectedMovie(title, posterPath);
+  };
 
   const handleDateSelect = (date) => {
     setSelectedDate(date);
@@ -33,7 +39,7 @@ export default function BookingContainer() {
   return (
     <div className="w-full flex flex-col items-center">
       <div className="w-[996px] flex justify-center bg-[#F2F0E4] mt-[20px]">
-        <BookingMovie onMovieSelec={setSelectedMovie} />
+        <BookingMovie onMovieSelec={handleMovieSelect} />
         <BookingTheater onTheaterSelect={handleTheaterSelect} />
         <BookingDate onDateSelect={handleDateSelect} />
         <BookingTime onTimeSelect={handleTimeSelect} />

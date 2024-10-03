@@ -331,16 +331,16 @@ export default function BookingTheater({ onTheaterSelect }) {
                   key={region.name}
                   className="overflow-hidden float-left w-[100%] h-[31px] leading-[31px] mb-[1px]"
                 >
-                  <a5
+                  <a
                     href="#"
                     onClick={() => handleAreaClick(region.name)}
-                    className={`block text-[#333] text-[12px] -tracking-[.1em] text-right text-ellipsis pl-[6px] pr-[8px] bg-[#e6e4d9] ${
+                    className={`block text-[#333] text-[12px] -tracking-[.1em] text-right text-ellipsis pl-[6px] pr-[8px] bg-[#e6e4d9] cursor-pointer transition-all duration-300 ${
                       selectedArea === region.name ? "bg-[#d3d3d3]" : ""
                     }`}
                   >
                     <span className="name">{region.name}</span>
                     <span className="count">({region.theaters.length})</span>
-                  </a5>
+                  </a>
                 </li>
               ))}
             </ul>
@@ -359,7 +359,7 @@ export default function BookingTheater({ onTheaterSelect }) {
                     >
                       <a
                         href="#"
-                        className={`block text-[12px] font-bold px-[7px] ${
+                        className={`block text-[12px] font-bold px-[7px] cursor-pointer transition-all duration-300 ${
                           selectedTheater === theater
                             ? "bg-[#333] text-white"
                             : "text-[#333]"
