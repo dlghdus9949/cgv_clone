@@ -1,8 +1,9 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router";
 import { BookingContext } from "./bookingContext";
+import DefaultModal from "./defaultModal";
 
-export default function BookingInfo({ navigateTo }) {
+export default function BookingInfo({ navigateTo, onClick }) {
   const IMG_BASE_URL = "https://image.tmdb.org/t/p/w500";
   const buttonImage = `${process.env.PUBLIC_URL}/image/tnb_buttons.png`;
   const {
@@ -16,6 +17,12 @@ export default function BookingInfo({ navigateTo }) {
     totalAmount,
     setTotalAmount,
   } = useContext(BookingContext);
+
+  const [isModalOpen, setIsModalOpen] = useState(false); // 모달 상태 관리
+  // 모달을 여는 함수
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
 
   const isSelectedMovie = selectedMovie && posterPath;
   const isSelectedTheater = selectedTheater;
@@ -69,6 +76,11 @@ export default function BookingInfo({ navigateTo }) {
     return Object.keys(selections).reduce((total, type) => {
       return total + selections[type];
     }, 0);
+  };
+
+  const handleClick = () => {
+    onClickSeat();
+    openModal();
   };
 
   const requiredSeatsCount = countSelectedSeats();
@@ -187,7 +199,7 @@ export default function BookingInfo({ navigateTo }) {
         {/* right */}
         <div
           className="btn_img"
-          onClick={onClickSeat}
+          onClick={handleClick}
           style={{
             backgroundImage: `url(${buttonImage})`,
             backgroundRepeat: "no-repeat",
@@ -199,6 +211,184 @@ export default function BookingInfo({ navigateTo }) {
             cursor: isRedArrow ? "pointer" : "default", // 빨간색 화살표일 때만 클릭 가능하도록
           }}
         ></div>
+
+        {/* 모달 */}
+        <DefaultModal
+          isOpen={isModalOpen}
+          closeModal={() => setIsModalOpen(false)}
+        >
+          <div className=" px-[40px] pt-[45px] pb-[20px]">
+            <div className="flex">
+              {/* 예매정보 */}
+              <div className="w-[422px] h-[257px] border-r border-[#bebebd] border-y-2 border-[#bebebd]">
+                <h5 className="h-[35px] pl-[23px] border-b border-[#bebebd] font-bold bg-[#eeeeec] leading-[35px]">
+                  예매정보
+                  <span className="text-[#666] text-[11px] pl-4">
+                    결제하시기 전 예매내역을 다시 한번 확인해 주세요.
+                  </span>
+                </h5>
+                <div className="flex pt-[20px] pb-[40px] ml-4">
+                  <div>
+                    <img
+                      src={`${IMG_BASE_URL}${posterPath}`}
+                      alt={selectedMovie}
+                      className="w-[110px] mr-[19px] h-auto object-cover mr-2"
+                    />
+                  </div>
+                  <table className="w-[270px]">
+                    <tbody>
+                      <tr className="text-[12px]">
+                        <th className="w-[50px] font-normal text-left">
+                          영화명
+                        </th>
+                        <td className="font-bold">{selectedMovie}</td>
+                      </tr>
+                      <tr className="text-[12px]">
+                        <th className="w-[50px] font-normal text-left">극장</th>
+                        <td className="font-bold">{selectedTheater}</td>
+                      </tr>
+                      <tr className="text-[12px]">
+                        <th className="w-[50px] font-normal text-left">일시</th>
+                        <td className="font-bold">
+                          {selectedDate
+                            ? selectedDate.toLocaleDateString()
+                            : ""}
+                        </td>
+                      </tr>
+
+                      <tr className="text-[12px]">
+                        <th className="w-[50px] font-normal text-left">인원</th>
+                        <td className="font-bold">
+                          {selections.일반 > 0 && (
+                            <span>일반 {selections.일반}명</span>
+                          )}
+                          {selections.청소년 > 0 && (
+                            <span>청소년 {selections.청소년}명</span>
+                          )}
+                          {selections.경로 > 0 && (
+                            <span>경로 {selections.경로}명</span>
+                          )}
+                          {selections.우대 > 0 && (
+                            <span>우대 {selections.우대}명</span>
+                          )}
+                        </td>
+                      </tr>
+                      <tr className="text-[12px]">
+                        <th className="w-[50px] font-normal text-left">좌석</th>
+                        <td className="font-bold">
+                          {selectedSeats.join(", ")}
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              {/* 결제정보 */}
+              <div className="w-[422px] h-[257px] border-r border-[#bebebd] border-y-2 border-[#bebebd]">
+                <h5 className="h-[35px] pl-[23px] border-b border-[#bebebd] font-bold bg-[#eeeeec] leading-[35px]">
+                  결제정보
+                  <span className="text-[#666] text-[11px] pl-4">
+                    결제하기 버튼을 클릭하시면 결제가 완료됩니다.
+                  </span>
+                </h5>
+                <div className="flex pt-[20px] pb-[40px]">
+                  <table className="w-[270px] ml-4">
+                    <tbody>
+                      <tr className="text-[12px]">
+                        <th className="w-[50px] font-normal text-left">
+                          결제수단
+                        </th>
+                        <td className="font-bold text-[#c62424] text-[16px] font-extrabold">
+                          {totalAmount.toLocaleString()}
+                          <span className="text-[12px] text-[#888]">원</span>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            {/* 규정 */}
+            <div className="w-full py-[15px] text-[12px] text-[#333] ml-4">
+              <ul className="space-y-[3px] mb-2">
+                <li>
+                  - 인터넷 예매는 온라인상으로 영화상영 시간 20분 전 까지 취소
+                  가능하며 20분 이후에는 현장에서 취소를 하셔야 합니다.
+                </li>
+                <li>
+                  - 현장 취소를 하는 경우 상영시간 이전까지만 가능하며 영화 상영
+                  시작 시간 이후 취소/환불/결제수단 변경은 불가합니다.
+                </li>
+                <li>
+                  - 입장 지연에 따른 관람 불편을 최소화하기 위해 본 영화는 10분
+                  후 상영이 시작됩니다.
+                </li>
+              </ul>
+              <a href="#" className="underline text-[#207cca] font-bold">
+                {"> "}예약취소 및 환불규정 안내
+              </a>
+            </div>
+            {/* 약관동의 */}
+            <div className="flex bg-[#eeeeec] py-4 border-y-2 border-[#bebebd]">
+              {/* 결제대행서비스 약관에 모두 동의 */}
+              <div className="border-r border-[#bebebd] w-[50%] pl-4">
+                <div className="flex items-center mb-2">
+                  <input type="checkbox" />
+                  <span className="ml-2 font-extrabold text-[12px] ">
+                    결제대행서비스 약관에 모두 동의
+                  </span>
+                </div>
+                <div className="ml-2">
+                  <div className="flex items-center ">
+                    <input type="checkbox" />
+                    <span className="ml-2 text-[12px] w-[300px]">
+                      전자금융거래 이용약관
+                    </span>
+                    <a
+                      href="#"
+                      className="underline text-[#207cca] font-bold text-[12px]"
+                    >
+                      전문확인
+                    </a>
+                  </div>
+                  <div className="flex items-center">
+                    <input type="checkbox" />
+                    <span className="ml-2  text-[12px] w-[300px]">
+                      개인정보 수집 이용약관
+                    </span>
+                    <a
+                      href="#"
+                      className="underline text-[#207cca] font-bold text-[12px]"
+                    >
+                      전문확인
+                    </a>
+                  </div>
+                  <div className="flex items-center">
+                    <input type="checkbox" />
+                    <span className="ml-2  text-[12px] w-[300px]">
+                      개인정보 제공 및 위탁 안내 약관
+                    </span>
+                    <a
+                      href="#"
+                      className="underline text-[#207cca] font-bold text-[12px]"
+                    >
+                      전문확인
+                    </a>
+                  </div>
+                </div>
+              </div>
+              {/* 상기 결제 내역을 모두 확인 했습니다 */}
+              <div className="w-[50%] pl-4">
+                <div className="flex items-center mb-2">
+                  <input type="checkbox" />
+                  <span className="ml-2 font-extrabold text-[12px] ">
+                    상기 결제 내역을 모두 확인 했습니다
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </DefaultModal>
       </div>
     </div>
   );

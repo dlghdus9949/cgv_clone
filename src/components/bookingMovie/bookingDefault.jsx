@@ -4,6 +4,7 @@ import { useState, useContext, useEffect, useRef } from "react";
 import "./bookingMovie.css";
 import BookingInfo from "./bookingInfo";
 import { BookingContext } from "./bookingContext";
+import Modal from "./defaultModal";
 
 export default function BookingDefault() {
   // 각 STEP의 토글 상태를 관리
@@ -46,18 +47,6 @@ export default function BookingDefault() {
   };
 
   // 스크롤
-  // const [scrollPosition, setScrollPosition] = useState(0);
-  // const handleScroll = () => {
-  //   const position = window.pageYOffset;
-  //   setScrollPosition(position);
-  // };
-  // useEffect(() => {
-  //   window.addEventListener("scroll", handleScroll);
-  //   return () => {
-  //     window.removeEventListener("scroll", handleScroll);
-  //   };
-  // }, []);
-  // 스크롤 범위를 제한하는 값 설정 (예: 100px 이상, 500px 이하로 제한)
   const [scrollPosition, setScrollPosition] = useState(0);
   const containerRef = useRef(null); // div에 대한 참조 생성
 
@@ -2081,8 +2070,7 @@ export default function BookingDefault() {
         selectedTheater={selectedTheater}
         selectedTime={selectedTime}
         selectedSeats={selectedSeats}
-      />
-
+      ></BookingInfo>
       <FixedBtn />
     </div>
   );
