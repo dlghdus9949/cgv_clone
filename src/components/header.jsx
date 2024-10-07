@@ -1,5 +1,6 @@
 import { NavLink } from "react-router-dom";
-export default function Header() {
+
+export default function Header({ isLoggedIn, onLogout }) {
   return (
     <div>
       {/* 배너 */}
@@ -39,37 +40,65 @@ export default function Header() {
                   />
                 </a>
               </div>
-              <li className="flex flex-col text-center mr-[44px] justify-center">
-                <a href="/login" className="flex justify-center">
-                  <img
-                    src={`${process.env.PUBLIC_URL}/image/login.png`}
-                    alt="로그인"
-                    className="w-[36px]"
-                  />
-                </a>
-                <div className="text-[13px]">로그인</div>
-              </li>
-              <li className="flex flex-col text-center mr-[36px] justify-center">
-                <a href="/joinWelcome" className="flex justify-center">
-                  <img
-                    src={`${process.env.PUBLIC_URL}/image/join.png`}
-                    alt="회원가입"
-                    className="w-[36px]"
-                  />
-                </a>
-                <div className="text-[13px]">회원가입</div>
-              </li>
-              <li className="flex flex-col text-center mr-[40px] justify-center">
-                <a href="#" className="flex justify-center">
-                  <img
-                    src={`${process.env.PUBLIC_URL}/image/member.png`}
-                    alt="마이페이지"
-                    className="w-[36px]"
-                  />
-                </a>
-                <div className="text-[13px]">MY CGV</div>
-              </li>
-              <li className="flex flex-col text-center justify-center">
+              {!isLoggedIn ? ( // 로그인 여부에 따라 조건부 렌더링
+                <>
+                  <li className="flex flex-col text-center mr-[44px] justify-center">
+                    <a href="/login" className="flex justify-center">
+                      <img
+                        src={`${process.env.PUBLIC_URL}/image/login.png`}
+                        alt="로그인"
+                        className="w-[36px]"
+                      />
+                    </a>
+                    <div className="text-[13px]">로그인</div>
+                  </li>
+                  <li className="flex flex-col text-center mr-[36px] justify-center">
+                    <a href="/joinWelcome" className="flex justify-center">
+                      <img
+                        src={`${process.env.PUBLIC_URL}/image/join.png`}
+                        alt="회원가입"
+                        className="w-[36px]"
+                      />
+                    </a>
+                    <div className="text-[13px]">회원가입</div>
+                  </li>
+                  <li className="flex flex-col text-center mr-[44px] justify-center">
+                    <NavLink to="/my-page" className="flex justify-center">
+                      <img
+                        src={`${process.env.PUBLIC_URL}/image/member.png`}
+                        alt="마이페이지"
+                        className="w-[36px]"
+                      />
+                    </NavLink>
+                    <div className="text-[13px]">MY PAGE</div>
+                  </li>
+                </>
+              ) : (
+                // 로그인한 경우
+                <>
+                  <li className="flex flex-col text-center mr-[44px] justify-center">
+                    <a href="/login" className="flex justify-center">
+                      <img
+                        src={`${process.env.PUBLIC_URL}/image/login.png`}
+                        alt="로그인"
+                        className="w-[36px]"
+                      />
+                    </a>
+                    <div className="text-[13px]">로그아웃</div>
+                  </li>
+                  <li className="flex flex-col text-center mr-[44px] justify-center">
+                    <NavLink to="/my-page" className="flex justify-center">
+                      <img
+                        src={`${process.env.PUBLIC_URL}/image/member.png`}
+                        alt="마이페이지"
+                        className="w-[36px]"
+                      />
+                    </NavLink>
+                    <div className="text-[13px]">MY PAGE</div>
+                  </li>
+                </>
+              )}
+              <li className="flex flex-col text-center justify-center mr-[40px]">
                 <a href="#" className="flex justify-center">
                   <img
                     src={`${process.env.PUBLIC_URL}/image/customer.png`}

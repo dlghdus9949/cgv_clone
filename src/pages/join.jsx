@@ -13,7 +13,6 @@ export default function Join() {
   const [birthDay, setBirthDay] = useState("");
   const [gender, setGender] = useState("");
   const [phone, setPhone] = useState("");
-  const [job, setJob] = useState("");
 
   const [idMessage, setIdMessage] = useState("");
   const [pwMessage, setPwMessage] = useState("");
@@ -107,10 +106,6 @@ export default function Join() {
     }
   };
 
-  const handleJob = (e) => {
-    setJob(e.target.value);
-  };
-
   useEffect(() => {
     if (isId && isPw && isPwConfirm && isEmail && isName && isPhone) {
       setNotAllow(false);
@@ -118,6 +113,38 @@ export default function Join() {
     }
     setNotAllow(true);
   }, [isId, isPw, isPwConfirm, isEmail, isName, isPhone]);
+
+  const handleSubmit = async () => {
+    const birth_date = `${birthYear}-${birthMonth}-${birthDay}`;
+
+    try {
+      const response = await fetch("http://localhost:8080/users/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          id: id,
+          user_name: name,
+          password: pw,
+          email: email,
+          phone_number: phone,
+          birth_date: birth_date,
+          gender: gender,
+        }),
+      });
+
+      if (response.ok) {
+        // 성공적으로 회원가입 시 처리 (예: 페이지 이동)
+        navigate("/login");
+      } else {
+        const errorData = await response.json();
+        console.error("회원가입 실패:", errorData);
+      }
+    } catch (error) {
+      console.error("회원가입 요청 중 오류 발생:", error);
+    }
+  };
 
   return (
     <>
@@ -315,23 +342,10 @@ export default function Join() {
                 {phoneMessage}
               </p>
             </div>
-            <div className="flex flex-col mt-5 ">
-              <span className="text-base ml-1">직업</span>
-              <select
-                className="border mt-1 p-3 rounded-lg"
-                value={job}
-                onChange={handleJob}
-              >
-                <option value="">직업 선택</option>
-                <option value="학생">학생</option>
-                <option value="주부">주부</option>
-                <option value="직장인">직장인</option>
-                <option value="기타">기타</option>
-              </select>
-            </div>
           </div>
           <button
             disabled={notAllow}
+            onClick={handleSubmit}
             className="
             submit border mt-10 w-[100%] h-14 rounded-full bg-[#fb4357]   text-white 
             disabled:bg-[#dadada] disabled:text-white

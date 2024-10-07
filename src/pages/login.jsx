@@ -1,12 +1,54 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
+import axios from "axios";
+import { useAuth } from "../AuthProvider";
 
 export default function Login() {
   const [selectedTab, setSelectedTab] = useState("login");
+  const [id, setId] = useState(""); // ID 상태
+  const [password, setPassword] = useState(""); // 비밀번호 상태
+  const [errorMessage, setErrorMessage] = useState(""); // 오류 메시지 상태
+  const [loading, setLoading] = useState(false); // 로딩 상태
+
+  const { login } = useAuth();
 
   // 탭 클릭 시 선택된 탭을 업데이트하는 함수
   const handleTabClick = (tab) => {
     setSelectedTab(tab);
+  };
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+
+    const loginData = {
+      id: id, // 사용자 ID
+      password: password, // 사용자 비밀번호
+    };
+
+    try {
+      const response = await axios.post(
+        "http://localhost:8080/users/login",
+        loginData,
+        {
+          withCredentials: true, // 크로스 도메인 요청 시 자격 증명 포함
+          headers: {
+            "Content-Type": "application/json", // 요청 본문 타입 설정
+          },
+        }
+      );
+
+      console.log(response.data); // 응답 데이터 로그
+      const token = response.data.token; // 응답에서 토큰 추출 (필요 시)
+      localStorage.setItem("token", token); // 로컬 스토리지에 토큰 저장
+
+      alert("로그인 성공!"); // 성공 알림
+    } catch (error) {
+      console.error(
+        "로그인 오류:",
+        error.response ? error.response.data : error.message
+      ); // 오류 메시지 로그
+      setErrorMessage("로그인 실패. 아이디와 비밀번호를 확인해주세요."); // 사용자에게 표시할 오류 메시지
+    }
   };
 
   return (
@@ -83,13 +125,21 @@ export default function Login() {
                               type="text"
                               title="id"
                               className="border-[2px] border-[#b5b5b5] w-[264px] h-[35px] pl-[40px] pr-[5px]"
+                              value={id}
+                              onChange={(e) => setId(e.target.value)} // ID 입력
                             />
                             <input
                               type="password"
                               title="password"
                               className="border-[2px] border-[#b5b5b5] w-[264px] h-[35px] pl-[40px] pr-[5px]"
+                              value={password}
+                              onChange={(e) => setPassword(e.target.value)} // 비밀번호 입력
                             />
-                            <button className="border-[2px] border-[#fff] w-[264px] h-[42px] mb-[10px] bg-[#fb4357] text-[#fff] font-bold">
+                            <button
+                              type=""
+                              className="border-[2px] border-[#fff] w-[264px] h-[42px] mb-[10px] bg-[#fb4357] text-[#fff] font-bold"
+                              onClick={handleLogin}
+                            >
                               로그인
                             </button>
                           </div>
