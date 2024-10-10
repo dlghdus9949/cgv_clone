@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 
 export default function Nav() {
   const [isDropdownVisible, setDropdownVisible] = useState(false);
@@ -68,74 +69,74 @@ export default function Nav() {
               )}
               <li className="pr-[24px] relative group">
                 <h2>
-                  <a
-                    href="/movies"
+                  <Link
+                    to="/movies"
                     className={`text-[16px] ${
                       isSticky ? "text-white" : "text-[#222]"
                     } font-bold`}
                   >
                     영화
-                  </a>
+                  </Link>
                 </h2>
               </li>
               <li className="px-[24px]">
                 <h2>
-                  <a
-                    href="/theaters"
+                  <Link
+                    to="/theaters"
                     className={`text-[16px] ${
                       isSticky ? "text-white" : "text-[#222]"
                     } font-bold`}
                   >
                     극장
-                  </a>
+                  </Link>
                 </h2>
               </li>
               <li className="px-[24px]">
                 <h2>
-                  <a
-                    href="/ticket"
+                  <Link
+                    to="/ticket"
                     className={`text-[16px] ${
                       isSticky ? "text-white" : "text-[#fb4357]"
                     } font-extrabold`}
                   >
                     예매
-                  </a>
+                  </Link>
                 </h2>
               </li>
               <li className="px-[24px]">
                 <h2>
-                  <a
-                    href="#"
+                  <Link
+                    to="#"
                     className={`text-[16px] ${
                       isSticky ? "text-white" : "text-[#222]"
                     } font-bold`}
                   >
                     스토어
-                  </a>
+                  </Link>
                 </h2>
               </li>
               <li className="px-[24px]">
                 <h2>
-                  <a
-                    href="#"
+                  <Link
+                    to="#"
                     className={`text-[16px] ${
                       isSticky ? "text-white" : "text-[#222]"
                     } font-bold`}
                   >
                     이벤트
-                  </a>
+                  </Link>
                 </h2>
               </li>
               <li className="px-[24px]">
                 <h2>
-                  <a
-                    href="#"
+                  <Link
+                    to="#"
                     className={`text-[16px] ${
                       isSticky ? "text-white" : "text-[#222]"
                     } font-bold`}
                   >
                     혜택
-                  </a>
+                  </Link>
                 </h2>
               </li>
             </ul>
@@ -152,198 +153,198 @@ export default function Nav() {
                       <h3 className="font-bold text-[#222] text-[16px]">
                         영화
                       </h3>
-                      <a
-                        href="/movies"
+                      <Link
+                        to="/movies"
                         className="font-normal text-[16px] text-[#666]"
                       >
                         무비차트
-                      </a>
-                      <a
-                        href="#"
+                      </Link>
+                      <Link
+                        to="#"
                         className="font-normal text-[16px] text-[#666]"
                       >
                         아트하우스
-                      </a>
-                      <a
-                        href="#"
+                      </Link>
+                      <Link
+                        to="#"
                         className="font-normal text-[16px] text-[#666]"
                       >
                         ICECON
-                      </a>
+                      </Link>
                     </div>
                     {/* 극장 */}
                     <div className="relative flex flex-col text-[#666] space-y-2 pr-14 after:absolute after:right-0 after:top-0 after:w-[1px] after:h-full after:bg-gray-300">
                       <h3 className="font-bold text-[#222] text-[16px]">
                         극장
                       </h3>
-                      <a
-                        href="#"
+                      <Link
+                        to="#"
                         className="font-normal text-[16px] text-[#666]"
                       >
                         CGV 극장
-                      </a>
-                      <a
-                        href="#"
+                      </Link>
+                      <Link
+                        to="#"
                         className="font-normal text-[16px] text-[#666]"
                       >
                         특별관
-                      </a>
+                      </Link>
                     </div>
                     {/* 예매 */}
                     <div className="relative flex flex-col text-[#666] space-y-2 pr-14 after:absolute after:right-0 after:top-0 after:w-[1px] after:h-full after:bg-gray-300">
                       <h3 className="font-bold text-[#222] text-[16px]">
                         예매
                       </h3>
-                      <a
-                        href="#"
+                      <Link
+                        to="#"
                         className="font-normal text-[16px] text-[#666]"
                       >
                         빠른예매
-                      </a>
-                      <a
-                        href="#"
+                      </Link>
+                      <Link
+                        to="#"
                         className="font-normal text-[16px] text-[#666]"
                       >
                         상영스케줄
-                      </a>
-                      <a
-                        href="#"
+                      </Link>
+                      <Link
+                        to="#"
                         className="font-normal text-[16px] text-[#666]"
                       >
                         English Ticketing
-                      </a>
-                      <a
-                        href="#"
+                      </Link>
+                      <Link
+                        to="#"
                         className="font-normal text-[16px] text-[#666]"
                       >
                         English Schedule
-                      </a>
+                      </Link>
                     </div>
                     {/* 스토어 */}
                     <div className="relative flex flex-col text-[#666] space-y-2 pr-14 after:absolute after:right-0 after:top-0 after:w-[1px] after:h-full after:bg-gray-300">
                       <h3 className="font-bold text-[#222] text-[16px]">
                         스토어
                       </h3>
-                      <a
-                        href="#"
+                      <Link
+                        to="#"
                         className="font-normal text-[16px] text-[#666]"
                       >
                         패키지
-                      </a>
-                      <a
-                        href="#"
+                      </Link>
+                      <Link
+                        to="#"
                         className="font-normal text-[16px] text-[#666]"
                       >
                         영화관람권
-                      </a>
-                      <a
-                        href="#"
+                      </Link>
+                      <Link
+                        to="#"
                         className="font-normal text-[16px] text-[#666]"
                       >
                         기프트카드
-                      </a>
-                      <a
-                        href="#"
+                      </Link>
+                      <Link
+                        to="#"
                         className="font-normal text-[16px] text-[#666]"
                       >
                         콤보
-                      </a>
-                      <a
-                        href="#"
+                      </Link>
+                      <Link
+                        to="#"
                         className="font-normal text-[16px] text-[#666]"
                       >
                         팝콘
-                      </a>
-                      <a
-                        href="#"
+                      </Link>
+                      <Link
+                        to="#"
                         className="font-normal text-[16px] text-[#666]"
                       >
                         음료
-                      </a>
-                      <a
-                        href="#"
+                      </Link>
+                      <Link
+                        to="#"
                         className="font-normal text-[16px] text-[#666]"
                       >
                         스낵
-                      </a>
-                      <a
-                        href="#"
+                      </Link>
+                      <Link
+                        to="#"
                         className="font-normal text-[16px] text-[#666]"
                       >
                         플레이존
-                      </a>
+                      </Link>
                     </div>
                     {/* 이벤트 */}
                     <div className="relative flex flex-col text-[#666] space-y-2 pr-14 after:absolute after:right-0 after:top-0 after:w-[1px] after:h-full after:bg-gray-300">
                       <h3 className="font-bold text-[#222] text-[16px]">
                         이벤트
                       </h3>
-                      <a
-                        href="#"
+                      <Link
+                        to="#"
                         className="font-normal text-[16px] text-[#666]"
                       >
                         SPECIAL
-                      </a>
-                      <a
-                        href="#"
+                      </Link>
+                      <Link
+                        to="#"
                         className="font-normal text-[16px] text-[#666]"
                       >
                         영화/예매
-                      </a>
-                      <a
-                        href="#"
+                      </Link>
+                      <Link
+                        to="#"
                         className="font-normal text-[16px] text-[#666]"
                       >
                         멤버십/CLUB
-                      </a>
-                      <a
-                        href="#"
+                      </Link>
+                      <Link
+                        to="#"
                         className="font-normal text-[16px] text-[#666]"
                       >
                         CGV 극장별
-                      </a>
-                      <a
-                        href="#"
+                      </Link>
+                      <Link
+                        to="#"
                         className="font-normal text-[16px] text-[#666]"
                       >
                         제휴할인
-                      </a>
-                      <a
-                        href="#"
+                      </Link>
+                      <Link
+                        to="#"
                         className="font-normal text-[16px] text-[#666]"
                       >
                         당첨자 발표
-                      </a>
-                      <a
-                        href="#"
+                      </Link>
+                      <Link
+                        to="#"
                         className="font-normal text-[16px] text-[#666]"
                       >
                         종료된 이벤트
-                      </a>
+                      </Link>
                     </div>
                     {/* 혜택 */}
                     <div className="flex flex-col text-[#666] space-y-2">
                       <h3 className="font-bold text-[#222] text-[16px]">
                         혜택
                       </h3>
-                      <a
-                        href="#"
+                      <Link
+                        to="#"
                         className="font-normal text-[16px] text-[#666]"
                       >
                         CGV 할인정보
-                      </a>
-                      <a
-                        href="#"
+                      </Link>
+                      <Link
+                        to="#"
                         className="font-normal text-[16px] text-[#666]"
                       >
                         CLUB 서비스
-                      </a>
-                      <a
-                        href="#"
+                      </Link>
+                      <Link
+                        to="#"
                         className="font-normal text-[16px] text-[#666]"
                       >
                         VIP 라운지
-                      </a>
+                      </Link>
                     </div>
                   </div>
                 </div>

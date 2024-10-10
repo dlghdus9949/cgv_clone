@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useAuth } from "../AuthProvider";
 
@@ -75,13 +75,13 @@ export default function Login() {
                         : "bg-[#898987] text-[#fdfcf0]"
                     }`}
                   >
-                    <a
-                      href="#"
+                    <Link
+                      to="#"
                       className="flex items-center text-[13px] text-center"
                       onClick={() => handleTabClick("login")}
                     >
                       로그인
-                    </a>
+                    </Link>
                   </li>
                   <li
                     className={`flex justify-center w-[100px] h-[37px] rounded-t-md ${
@@ -90,13 +90,13 @@ export default function Login() {
                         : "bg-[#898987] text-[#fdfcf0]"
                     }`}
                   >
-                    <a
-                      href="#"
+                    <Link
+                      to="#"
                       className="flex items-center text-[13px] text-center"
                       onClick={() => handleTabClick("guestReservation")}
                     >
                       비회원 예매
-                    </a>
+                    </Link>
                   </li>
                   <li
                     className={`flex justify-center w-[100px] h-[37px] rounded-t-md ${
@@ -105,13 +105,13 @@ export default function Login() {
                         : "bg-[#898987] text-[#fdfcf0]"
                     }`}
                   >
-                    <a
-                      href="#"
+                    <Link
+                      to="#"
                       className="flex items-center text-[13px] text-center"
                       onClick={() => handleTabClick("guestCheck")}
                     >
                       비회원 예매확인
-                    </a>
+                    </Link>
                   </li>
                 </ul>
               </div>
@@ -176,12 +176,12 @@ export default function Login() {
                       </form>
                       {/* 휴대폰으로 모든 사이트 로그인 */}
                       <div>
-                        <a href="#">
+                        <Link to="#">
                           <img
                             src={`${process.env.PUBLIC_URL}/image/phoneLogin.png`}
                             alt="휴대폰으로 모든 사이트 로그인"
                           />
-                        </a>
+                        </Link>
                       </div>
                     </div>
                     {/* CJ ONE 회원이 아니신가요? */}
@@ -282,12 +282,12 @@ export default function Login() {
                       </div>
                       {/* 휴대폰으로 모든 사이트 로그인 */}
                       <div>
-                        <a href="#">
+                        <Link to="#">
                           <img
                             src={`${process.env.PUBLIC_URL}/image/phoneLogin.png`}
                             alt="휴대폰으로 모든 사이트 로그인"
                           />
-                        </a>
+                        </Link>
                       </div>
                     </div>
                     {/* STEP 2 */}

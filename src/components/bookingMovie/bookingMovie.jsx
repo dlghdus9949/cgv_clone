@@ -4,6 +4,7 @@ import axios from "axios";
 import "./bookingMovie.css";
 import { useContext } from "react";
 import { BookingContext } from "./bookingContext"; // BookingContext 불러오기
+import { Link } from "react-router-dom";
 export const IMG_BASE_URL = "https://image.tmdb.org/t/p/w500";
 
 export default function BookingMovie({ onMovieSelect }) {
@@ -66,12 +67,12 @@ export default function BookingMovie({ onMovieSelect }) {
           <div className="movie_select mt-[5px]">
             {/* 전체, 아트하우스, 특별관 */}
             <section className="relative flex mt-[5px] h-[30px] flex justify-center">
-              <a
-                href="#"
+              <Link
+                to="#"
                 className="w-[58px] text-[12px] text-center items-center flex justify-center border-x border-t border-slate-950	"
               >
                 전체
-              </a>
+              </Link>
               <select
                 name=""
                 id=""
@@ -118,24 +119,24 @@ export default function BookingMovie({ onMovieSelect }) {
             </section>
             {/* 예매율순, 가나다순 */}
             <div className="sort mx-[25px] mt-[5px] border-b-[3px] border-[#999] pb-[2px]">
-              <a
-                href="#"
+              <Link
+                to="#"
                 onClick={() => handleSortClick("예매율순")}
                 className={`sort-link text-[#333] text-[12px] pr-[5px] pb-[8px] ${
                   activeSort === "예매율순" ? "active" : ""
                 }`}
               >
                 예매율순
-              </a>
-              <a
-                href="#"
+              </Link>
+              <Link
+                to="#"
                 onClick={() => handleSortClick("가나다순")}
                 className={`sort-link text-[#333] text-[12px] pr-[5px] pb-[8px] ${
                   activeSort === "가나다순" ? "active" : ""
                 }`}
               >
                 가나다순
-              </a>
+              </Link>
             </div>
 
             <div className="movie_list mx-[25px] mt-[5px] pb-[2px]">

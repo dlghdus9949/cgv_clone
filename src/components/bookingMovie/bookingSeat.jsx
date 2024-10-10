@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import BookingInfo from "./bookingInfo";
 import BookingNav from "./bookingNav";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { BookingContext } from "./bookingContext";
 
 const rows = [
@@ -128,13 +128,13 @@ export default function BookingSeat() {
               selections[category] === value ? "bg-black text-white" : ""
             }`}
           >
-            <a
-              href="#"
+            <Link
+              to="#"
               className="w-[16px] h-[16px] flex items-center justify-center"
               onClick={() => handleSelection(category, value)}
             >
               {value}
-            </a>
+            </Link>
           </li>
         ))}
       </ul>

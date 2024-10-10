@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, NavLink } from "react-router-dom";
+import { useNavigate, NavLink, Link } from "react-router-dom";
 
 import axios from "axios";
 import "./main.css";
@@ -92,8 +92,8 @@ export default function Main(props) {
                   프리미어 상영 예매 GO
                 </span>
                 <div className="absolute flex flex-row top-[315px] left-40 z-10">
-                  <a
-                    href="#"
+                  <Link
+                    to="#"
                     className="flex py-[5px] px-[18px] text-[14px] text-[#343434] leading-[1.429em] bg-[#fff] rounded-2xl items-center flex-row justify-center"
                   >
                     상세보기
@@ -102,9 +102,9 @@ export default function Main(props) {
                       alt="banner"
                       className="flex pl-[6px] w-[17px] h-[17px] align-center"
                     />
-                  </a>
-                  <a
-                    href="#"
+                  </Link>
+                  <Link
+                    to="#"
                     className="flex flex-row items-center justify-center"
                   >
                     <img
@@ -112,9 +112,9 @@ export default function Main(props) {
                       alt="play"
                       className="flex align-center border rounded-3xl ml-[8px] w-[35px] p-[4px]"
                     />
-                  </a>
-                  <a
-                    href="#"
+                  </Link>
+                  <Link
+                    to="#"
                     className="flex flex-row items-center justify-center"
                   >
                     <img
@@ -122,7 +122,7 @@ export default function Main(props) {
                       alt="soundOff"
                       className="flex align-center border rounded-3xl ml-[8px] w-[35px] p-[4px]"
                     />
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -135,22 +135,22 @@ export default function Main(props) {
           <div className="btn_wrap flex items-center mt-[40px] mb-[20px] justify-between">
             <div className="flex">
               <h3>
-                <a href="#" className="text-[26px] font-bold">
+                <Link to="#" className="text-[26px] font-bold">
                   무비차트
-                </a>
+                </Link>
               </h3>
               <h3 className="ml-[32px] relative before:absolute before:left-[-16px] before:top-1/2 before:w-px before:h-[14px] before:-mt-[7px] before:bg-[#d8d8d8]">
-                <a href="#" className="text-[26px] font-bold">
+                <Link to="#" className="text-[26px] font-bold">
                   상영예정작
-                </a>
+                </Link>
               </h3>
             </div>
-            <a
-              href="/movies"
+            <Link
+              to="/movies"
               className="text-[14px] text-[#222] font-medium leading-[1.429em] border rounded-[15px] py-[4px] px-[15px] shadow-sm"
             >
               전체보기 {" >"}
-            </a>
+            </Link>
           </div>
 
           <div className="movie_list flex items-center justify-center pt-[20px] relative">
@@ -220,7 +220,7 @@ export default function Main(props) {
               Event
             </h3>
             <div className="flex items-center">
-              <a href="#" className="mr-2">
+              <Link to="#" className="mr-2">
                 <div className="flex align-center justify-center items-center border border-[#e3e3e3] rounded-full ml-[8px] w-[28px] h-[28px] p-[2px]">
                   <img
                     src={`${process.env.PUBLIC_URL}/image/stop.png`}
@@ -228,19 +228,19 @@ export default function Main(props) {
                     className="w-[15px] h-[15px] object-contain"
                   />
                 </div>
-              </a>
-              <a
-                href="/movies"
+              </Link>
+              <Link
+                to="/movies"
                 className="text-[14px] font-medium	 text-[#222] leading-[1.429em] border rounded-[15px] py-[4px] px-[15px] shadow-sm"
               >
                 전체보기 {" >"}
-              </a>
+              </Link>
             </div>
           </div>
           <div className="event_list_wrap mt-[19px] relative w-[100%]">
             <div className="event_list flex">
               <div className="w-[310px] mr-[24px]">
-                <a href="#">
+                <Link to="#">
                   <div className="img_wrap border-none rounded-[10px]">
                     <img
                       src={`${process.env.PUBLIC_URL}/image/event_1.jpg`}
@@ -253,10 +253,10 @@ export default function Main(props) {
                   <p className="mt-[4px] text-[14px] text-[#666] leading-[1.429em]">
                     2024.8.30~2024.09.15
                   </p>
-                </a>
+                </Link>
               </div>
               <div className="w-[310px] mr-[24px]">
-                <a href="#">
+                <Link to="#">
                   <div className="img_wrap border-none rounded-[10px]">
                     <img
                       src={`${process.env.PUBLIC_URL}/image/event_2.jpg`}
@@ -269,7 +269,7 @@ export default function Main(props) {
                   <p className="mt-[4px] text-[14px] text-[#666] leading-[1.429em]">
                     2024.8.29~2024.09.13
                   </p>
-                </a>
+                </Link>
               </div>
             </div>
           </div>
@@ -284,16 +284,16 @@ export default function Main(props) {
             <h3 className="m-0 font-bold text-[26px] text-[#222] leading-[1.423em]">
               특별관
             </h3>
-            <a
-              href="/movies"
+            <Link
+              to="/movies"
               className="text-[14px] font-medium text-[#222] leading-[1.429em] border rounded-[15px] py-[4px] px-[15px] shadow-sm"
             >
               전체보기 {" >"}
-            </a>
+            </Link>
           </div>
           {/* 특별관 콘텐츠 */}
           <div className="specialHall_content flex justify-between mt-[19px] relative">
-            <a href="#" className="w-[500px] border-none rounded-[10px]">
+            <Link to="#" className="w-[500px] border-none rounded-[10px]">
               <div className="img_wrap relative">
                 <img
                   src={imgSrc}
@@ -301,7 +301,7 @@ export default function Main(props) {
                   className="object-cover w-full h-full transition-opacity duration-300"
                 />
               </div>
-            </a>
+            </Link>
             <ul className="w-[440px]">
               {[
                 "specialHall_1.png",
@@ -319,8 +319,8 @@ export default function Main(props) {
                   onMouseOver={() => handleMouseOver(img, index)}
                   onMouseOut={handleMouseOut}
                 >
-                  <a
-                    href="#"
+                  <Link
+                    to="#"
                     className="flex justify-between items-center py-[19px] pr-[25px] pl-[19px]"
                   >
                     <strong
@@ -341,7 +341,7 @@ export default function Main(props) {
                         {index === 3 && "#쉐프가 있는 영화관"}
                       </span>
                     </div>
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -358,15 +358,15 @@ export default function Main(props) {
               <dl className="giftcon_list">
                 <dt className="flex justify-between items-center font-medium text-[20px] text-[#222] leading-[1.450em]">
                   패키지
-                  <a
-                    href="#"
+                  <Link
+                    to="#"
                     className="text-[14px] font-medium text-[#222] leading-[1.429em] border rounded-[15px] py-[4px] px-[12px] shadow-sm"
                   >
                     더보기
-                  </a>
+                  </Link>
                 </dt>
                 <dd className="mt-[27px]">
-                  <a href="#" className="flex justify-left items-center">
+                  <Link to="#" className="flex justify-left items-center">
                     <div className="img_wrap w-[75px] h-[76px] border-none rounded-[5px]">
                       <img
                         src={`${process.env.PUBLIC_URL}/image/package_1.jpg`}
@@ -382,10 +382,10 @@ export default function Main(props) {
                         14,000원
                       </strong>
                     </div>
-                  </a>
+                  </Link>
                 </dd>
                 <dd className="mt-[27px]">
-                  <a href="#" className="flex justify-left items-center">
+                  <Link to="#" className="flex justify-left items-center">
                     <div className="img_wrap w-[75px] h-[76px] border-none rounded-[5px]">
                       <img
                         src={`${process.env.PUBLIC_URL}/image/package_2.jpg`}
@@ -401,10 +401,10 @@ export default function Main(props) {
                         62,000원
                       </strong>
                     </div>
-                  </a>
+                  </Link>
                 </dd>
                 <dd className="mt-[27px]">
-                  <a href="#" className="flex justify-left items-center">
+                  <Link to="#" className="flex justify-left items-center">
                     <div className="img_wrap w-[75px] h-[76px] border-none rounded-[5px]">
                       <img
                         src={`${process.env.PUBLIC_URL}/image/package_3.jpg`}
@@ -420,7 +420,7 @@ export default function Main(props) {
                         35,000원
                       </strong>
                     </div>
-                  </a>
+                  </Link>
                 </dd>
               </dl>
             </li>
@@ -429,15 +429,15 @@ export default function Main(props) {
               <dl className="giftcon_list">
                 <dt className="flex justify-between items-center font-medium text-[20px] text-[#222] leading-[1.450em]">
                   영화관람권
-                  <a
-                    href="#"
+                  <Link
+                    to="#"
                     className="text-[14px] font-medium text-[#222] leading-[1.429em] border rounded-[15px] py-[4px] px-[12px] shadow-sm"
                   >
                     더보기
-                  </a>
+                  </Link>
                 </dt>
                 <dd className="mt-[27px]">
-                  <a href="#" className="flex justify-left items-center">
+                  <Link to="#" className="flex justify-left items-center">
                     <div className="img_wrap w-[75px] h-[76px] border-none rounded-[5px]">
                       <img
                         src={`${process.env.PUBLIC_URL}/image/ticket_1.jpg`}
@@ -453,10 +453,10 @@ export default function Main(props) {
                         13,000원
                       </strong>
                     </div>
-                  </a>
+                  </Link>
                 </dd>
                 <dd className="mt-[27px]">
-                  <a href="#" className="flex justify-left items-center">
+                  <Link to="#" className="flex justify-left items-center">
                     <div className="img_wrap w-[75px] h-[76px] border-none rounded-[5px]">
                       <img
                         src={`${process.env.PUBLIC_URL}/image/ticket_2.jpg`}
@@ -472,10 +472,10 @@ export default function Main(props) {
                         18,000원
                       </strong>
                     </div>
-                  </a>
+                  </Link>
                 </dd>
                 <dd className="mt-[27px]">
-                  <a href="#" className="flex justify-left items-center">
+                  <Link to="#" className="flex justify-left items-center">
                     <div className="img_wrap w-[75px] h-[76px] border-none rounded-[5px]">
                       <img
                         src={`${process.env.PUBLIC_URL}/image/ticket_3.jpg`}
@@ -491,7 +491,7 @@ export default function Main(props) {
                         19,000원
                       </strong>
                     </div>
-                  </a>
+                  </Link>
                 </dd>
               </dl>
             </li>
@@ -500,15 +500,15 @@ export default function Main(props) {
               <dl className="giftcon_list">
                 <dt className="flex justify-between items-center font-medium text-[20px] text-[#222] leading-[1.450em]">
                   기프트카드
-                  <a
-                    href="#"
+                  <Link
+                    to="#"
                     className="text-[14px] font-medium text-[#222] leading-[1.429em] border rounded-[15px] py-[4px] px-[12px] shadow-sm"
                   >
                     더보기
-                  </a>
+                  </Link>
                 </dt>
                 <dd className="mt-[27px]">
-                  <a href="#" className="flex justify-left items-center">
+                  <Link to="#" className="flex justify-left items-center">
                     <div className="img_wrap w-[75px] h-[76px] border-none rounded-[5px]">
                       <img
                         src={`${process.env.PUBLIC_URL}/image/giftcard_1.jpg`}
@@ -524,10 +524,10 @@ export default function Main(props) {
                         금액충전형
                       </strong>
                     </div>
-                  </a>
+                  </Link>
                 </dd>
                 <dd className="mt-[27px]">
-                  <a href="#" className="flex justify-left items-center">
+                  <Link to="#" className="flex justify-left items-center">
                     <div className="img_wrap w-[75px] h-[76px] border-none rounded-[5px]">
                       <img
                         src={`${process.env.PUBLIC_URL}/image/giftcard_2.jpg`}
@@ -543,10 +543,10 @@ export default function Main(props) {
                         금액충전형
                       </strong>
                     </div>
-                  </a>
+                  </Link>
                 </dd>
                 <dd className="mt-[27px]">
-                  <a href="#" className="flex justify-left items-center">
+                  <Link to="#" className="flex justify-left items-center">
                     <div className="img_wrap w-[75px] h-[76px] border-none rounded-[5px]">
                       <img
                         src={`${process.env.PUBLIC_URL}/image/giftcard_3.jpg`}
@@ -562,7 +562,7 @@ export default function Main(props) {
                         금액충전형
                       </strong>
                     </div>
-                  </a>
+                  </Link>
                 </dd>
               </dl>
             </li>
@@ -579,19 +579,19 @@ export default function Main(props) {
                 <strong className="float-left font-bold text-[16px] text-[#222] leading-[1.500em]">
                   공지사항
                 </strong>
-                <a
-                  href="#"
+                <Link
+                  to="#"
                   className="float-left overflow-hidden	max-w-[300px] mt-[2px] ml-[28px] text-[14px] text-[#222] leading-[1.429em] text-ellipsis whitespace-nowrap"
                 >
                   [극장][CGV] {"<"}블랙핑크 월드투어 [본 핑크] 인 시네마{">"}{" "}
                   무대인사 회차 휠체어석 유의사항 안내
-                </a>
-                <a
-                  href="#"
+                </Link>
+                <Link
+                  to="#"
                   className="float-right text-[14px] font-medium text-[#222] border rounded-[15px] py-[3px] px-[15px] shadow-sm "
                 >
                   더보기
-                </a>
+                </Link>
               </div>
 
               <div className="client_wrap ">
@@ -614,24 +614,24 @@ export default function Main(props) {
                   </dd>
                 </dl>
                 <div className="flex float-left">
-                  <a
-                    href="#"
+                  <Link
+                    to="#"
                     className="py-[7px] px-[14px] text-[14px] text-[#222] leading-[1.429em] bg-[#f6f6f6] rounded-[5px]"
                   >
                     FAQ
-                  </a>
-                  <a
-                    href="#"
+                  </Link>
+                  <Link
+                    to="#"
                     className="py-[7px] px-[14px] text-[14px] text-[#222] leading-[1.429em] bg-[#f6f6f6] rounded-[5px] ml-2"
                   >
                     1:1 문의
-                  </a>
-                  <a
-                    href="#"
+                  </Link>
+                  <Link
+                    to="#"
                     className="py-[7px] px-[14px] text-[14px] text-[#222] leading-[1.429em] bg-[#f6f6f6] rounded-[5px] ml-2"
                   >
                     대관/단체 문의
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>

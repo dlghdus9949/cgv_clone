@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router";
 import { BookingContext } from "./bookingContext";
 import DefaultModal from "./defaultModal";
+import { Link } from "react-router-dom";
 
 export default function BookingInfo({ navigateTo, onClick }) {
   const IMG_BASE_URL = "https://image.tmdb.org/t/p/w500";
@@ -324,9 +325,9 @@ export default function BookingInfo({ navigateTo, onClick }) {
                   후 상영이 시작됩니다.
                 </li>
               </ul>
-              <a href="#" className="underline text-[#207cca] font-bold">
+              <Link to="#" className="underline text-[#207cca] font-bold">
                 {"> "}예약취소 및 환불규정 안내
-              </a>
+              </Link>
             </div>
             {/* 약관동의 */}
             <div className="flex bg-[#eeeeec] py-4 border-y-2 border-[#bebebd]">
@@ -344,36 +345,36 @@ export default function BookingInfo({ navigateTo, onClick }) {
                     <span className="ml-2 text-[12px] w-[300px]">
                       전자금융거래 이용약관
                     </span>
-                    <a
-                      href="#"
+                    <Link
+                      to="#"
                       className="underline text-[#207cca] font-bold text-[12px]"
                     >
                       전문확인
-                    </a>
+                    </Link>
                   </div>
                   <div className="flex items-center">
                     <input type="checkbox" />
                     <span className="ml-2  text-[12px] w-[300px]">
                       개인정보 수집 이용약관
                     </span>
-                    <a
-                      href="#"
+                    <Link
+                      to="#"
                       className="underline text-[#207cca] font-bold text-[12px]"
                     >
                       전문확인
-                    </a>
+                    </Link>
                   </div>
                   <div className="flex items-center">
                     <input type="checkbox" />
                     <span className="ml-2  text-[12px] w-[300px]">
                       개인정보 제공 및 위탁 안내 약관
                     </span>
-                    <a
-                      href="#"
+                    <Link
+                      to="#"
                       className="underline text-[#207cca] font-bold text-[12px]"
                     >
                       전문확인
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>

@@ -1,6 +1,6 @@
 import React from "react";
 import { useAuth } from "../AuthProvider"; // AuthProvider 가져오기
-import { NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 
 export default function Header() {
   const { isLoggedIn, logout } = useAuth(); // 로그인 상태와 로그아웃 함수 가져오기
@@ -15,25 +15,25 @@ export default function Header() {
     <div>
       {/* 배너 */}
       <div className="banner flex justify-center bg-[#23114F]">
-        <a href="/">
+        <Link to="/">
           <img
             src={`${process.env.PUBLIC_URL}/image/banner.jpg`}
             alt="banner"
           />
-        </a>
+        </Link>
       </div>
 
       {/* 헤더 */}
       <div className="flex justify-center pt-[30px] pb-[25px] px-40 border-b-[1px]">
         <div className="w-[86%] flex justify-between">
           <div className="left flex">
-            <a href="/" className="flex items-center">
+            <Link to="/" className="flex items-center">
               <img
                 src={`${process.env.PUBLIC_URL}/image/logo.png`}
                 alt="logo"
                 className="w-[117px] mr-2"
               />
-            </a>
+            </Link>
             <h1 className="mt-8 tracking-[0.3em] font-extralight text-base text-[#222] flex items-center">
               DEEP DIVE SPACE
             </h1>
@@ -42,13 +42,13 @@ export default function Header() {
           <div className="right">
             <ul className="flex">
               <div className="flex mr-10">
-                <a href="#" className="flex flex-col justify-center">
+                <Link to="#" className="flex flex-col justify-center">
                   <img
                     src={`${process.env.PUBLIC_URL}/image/hyundaicard.png`}
                     alt="현대카드"
                     className="flex items-center w-[140px]"
                   />
-                </a>
+                </Link>
               </div>
               {!isLoggedIn ? ( // 로그인 여부에 따라 조건부 렌더링
                 <>
@@ -66,13 +66,13 @@ export default function Header() {
                     <div className="text-[13px]">로그인</div>
                   </li>
                   <li className="flex flex-col text-center mr-[36px] justify-center">
-                    <a href="/joinWelcome" className="flex justify-center">
+                    <Link to="/joinWelcome" className="flex justify-center">
                       <img
                         src={`${process.env.PUBLIC_URL}/image/join.png`}
                         alt="회원가입"
                         className="w-[36px]"
                       />
-                    </a>
+                    </Link>
                     <div className="text-[13px]">회원가입</div>
                   </li>
                   <li className="flex flex-col text-center mr-[44px] justify-center">
@@ -91,13 +91,13 @@ export default function Header() {
                 <>
                   <li className="flex flex-col text-center mr-[44px] justify-center">
                     <button onClick={handleLogout}>
-                      <a href="/login" className="flex justify-center">
+                      <Link to="/login" className="flex justify-center">
                         <img
                           src={`${process.env.PUBLIC_URL}/image/login.png`}
                           alt="로그아웃"
                           className="w-[36px]"
                         />
-                      </a>
+                      </Link>
                       <div className="text-[13px]">로그아웃</div>
                     </button>
                   </li>
@@ -114,13 +114,13 @@ export default function Header() {
                 </>
               )}
               <li className="flex flex-col text-center justify-center mr-[40px]">
-                <a href="#" className="flex justify-center">
+                <Link to="#" className="flex justify-center">
                   <img
                     src={`${process.env.PUBLIC_URL}/image/customer.png`}
                     alt="고객센터"
                     className="w-[36px]"
                   />
-                </a>
+                </Link>
                 <div className="text-[13px]">고객센터</div>
               </li>
             </ul>

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function BookingTheater({ onTheaterSelect }) {
   // 지역과 세부극장 데이터를 관리하는 상태
@@ -268,12 +269,12 @@ export default function BookingTheater({ onTheaterSelect }) {
         <div className="tab flex justify-center mt-2">
           <div className="">
             <section className="relative flex mt-[5px] h-[30px]">
-              <a
-                href="#"
+              <Link
+                to="#"
                 className="w-[58px] text-[12px] text-center items-center flex justify-center border-x border-t border-slate-950	"
               >
                 전체
-              </a>
+              </Link>
               <select
                 name=""
                 id=""
@@ -331,8 +332,8 @@ export default function BookingTheater({ onTheaterSelect }) {
                   key={region.name}
                   className="overflow-hidden float-left w-[100%] h-[31px] leading-[31px] mb-[1px]"
                 >
-                  <a
-                    href="#"
+                  <Link
+                    to="#"
                     onClick={() => handleAreaClick(region.name)}
                     className={`block text-[#333] text-[12px] -tracking-[.1em] text-right text-ellipsis pl-[6px] pr-[8px] bg-[#e6e4d9] cursor-pointer transition-all duration-300 ${
                       selectedArea === region.name ? "bg-[#d3d3d3]" : ""
@@ -340,7 +341,7 @@ export default function BookingTheater({ onTheaterSelect }) {
                   >
                     <span className="name">{region.name}</span>
                     <span className="count">({region.theaters.length})</span>
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -357,8 +358,8 @@ export default function BookingTheater({ onTheaterSelect }) {
                       key={theater}
                       className="overflow-hidden float-left w-[114px] h-[31px] leading-[31px] mb-[1px]"
                     >
-                      <a
-                        href="#"
+                      <Link
+                        to="#"
                         className={`block text-[12px] font-bold px-[7px] cursor-pointer transition-all duration-300 ${
                           selectedTheater === theater
                             ? "bg-[#333] text-white"
@@ -367,7 +368,7 @@ export default function BookingTheater({ onTheaterSelect }) {
                         onClick={() => handleTheaterClick(theater)} // 극장 클릭 시 호출
                       >
                         {theater}
-                      </a>
+                      </Link>
                     </li>
                   ))}
               </ul>

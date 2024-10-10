@@ -5,6 +5,7 @@ import "./bookingMovie.css";
 import BookingInfo from "./bookingInfo";
 import { BookingContext } from "./bookingContext";
 import Modal from "./defaultModal";
+import { Link } from "react-router-dom";
 
 export default function BookingDefault() {
   // 각 STEP의 토글 상태를 관리
@@ -92,11 +93,11 @@ export default function BookingDefault() {
               <h2 className="h-[100%] text-[17px] font-extrabold flex items-center ml-4">
                 STEP 1.
               </h2>
-              <a href="#" className="refresh mr-[12px] pr-[24px]">
+              <Link a="#" className="refresh mr-[12px] pr-[24px]">
                 <span className="text-[#e6e6e6] text-[12px] font-extrabold">
                   다시하기
                 </span>
-              </a>
+              </Link>
             </div>
             <div className="flex justify-between h-[43px] bg-[#dfded6] text-[#333]">
               <h4 className="h-[100%] text-[17px] font-extrabold flex items-center ml-4">
@@ -132,25 +133,25 @@ export default function BookingDefault() {
                           className="w-[100%] border-b border-[#d7d6cf]"
                           onClick={() => handleCouponClick("CGV 할인쿠폰")}
                         >
-                          <a href="#">CGV 할인쿠폰</a>
+                          <Link to="#">CGV 할인쿠폰</Link>
                         </li>
                         <li
                           className="w-[100%] border-b border-[#d7d6cf]"
                           onClick={() => handleCouponClick("CJ ONE 할인쿠폰")}
                         >
-                          <a href="#">CJ ONE 할인쿠폰</a>
+                          <Link to="#">CJ ONE 할인쿠폰</Link>
                         </li>
                         <li
                           className="w-[100%] border-b border-[#d7d6cf]"
                           onClick={() => handleCouponClick("신용카드 할인쿠폰")}
                         >
-                          <a href="#">신용카드 할인쿠폰</a>
+                          <Link to="#">신용카드 할인쿠폰</Link>
                         </li>
                         <li
                           className="w-[100%]"
                           onClick={() => handleCouponClick("최종결제 할인쿠폰")}
                         >
-                          <a href="#">최종결제 할인쿠폰</a>
+                          <Link to="#">최종결제 할인쿠폰</Link>
                         </li>
                       </ul>
                     </div>
@@ -366,11 +367,11 @@ export default function BookingDefault() {
               <h2 className="h-[100%] text-[17px] font-extrabold flex items-center ml-4">
                 STEP 2.
               </h2>
-              <a href="#" className="refresh mr-[12px] pr-[24px]">
+              <Link to="#" className="refresh mr-[12px] pr-[24px]">
                 <span className="text-[#e6e6e6] text-[12px] font-extrabold">
                   다시하기
                 </span>
-              </a>
+              </Link>
             </div>
             <div className="flex justify-between h-[43px] bg-[#dfded6] text-[#333]">
               <h4 className="h-[100%] text-[17px] font-extrabold flex items-center ml-4">
@@ -406,19 +407,19 @@ export default function BookingDefault() {
                           className="w-[100%] border-b border-[#d7d6cf]"
                           onClick={() => handleCouponClick("CGV 영화관람권")}
                         >
-                          <a href="#">CGV 영화관람권</a>
+                          <Link to="#">CGV 영화관람권</Link>
                         </li>
                         <li
                           className="w-[100%] border-b border-[#d7d6cf]"
                           onClick={() => handleCouponClick("CGV 기프트콘")}
                         >
-                          <a href="#">CGV 기프트콘</a>
+                          <Link to="#">CGV 기프트콘</Link>
                         </li>
                         <li
                           className="w-[100%] border-b border-[#d7d6cf]"
                           onClick={() => handleCouponClick("무비패스카드")}
                         >
-                          <a href="#">무비패스카드</a>
+                          <Link to="#">무비패스카드</Link>
                         </li>
                         <li
                           className="w-[100%] border-b border-[#d7d6cf]"
@@ -426,7 +427,7 @@ export default function BookingDefault() {
                             handleCouponClick("쿠프마케팅 아이넘버 예매권")
                           }
                         >
-                          <a href="#">쿠프마케팅 아이넘버 예매권</a>
+                          <Link to="#">쿠프마케팅 아이넘버 예매권</Link>
                         </li>
                         <li
                           className="w-[100%] border-b border-[#d7d6cf]"
@@ -434,7 +435,7 @@ export default function BookingDefault() {
                             handleCouponClick("즐거운 스마일콘 예매권")
                           }
                         >
-                          <a href="#">즐거운 스마일콘 예매권</a>
+                          <Link to="#">즐거운 스마일콘 예매권</Link>
                         </li>
                         <li
                           className="w-[100%] border-b border-[#d7d6cf]"
@@ -442,19 +443,19 @@ export default function BookingDefault() {
                             handleCouponClick("카카오선물하기 예매권")
                           }
                         >
-                          <a href="#">카카오선물하기 예매권</a>
+                          <Link to="#">카카오선물하기 예매권</Link>
                         </li>
                         <li
                           className="w-[100%] border-b border-[#d7d6cf]"
                           onClick={() => handleCouponClick("옥션/G마켓 예매권")}
                         >
-                          <a href="#">옥션/G마켓 예매권</a>
+                          <Link to="#">옥션/G마켓 예매권</Link>
                         </li>
                         <li
                           className="w-[100%] border-b border-[#d7d6cf]"
                           onClick={() => handleCouponClick("FUN-CON")}
                         >
-                          <a href="#">FUN-CON</a>
+                          <Link to="#">FUN-CON</Link>
                         </li>
                         <li
                           className="w-[100%]"
@@ -462,7 +463,7 @@ export default function BookingDefault() {
                             handleCouponClick("원큐브마케팅 기프팅 예매권")
                           }
                         >
-                          <a href="#">원큐브마케팅 기프팅 예매권</a>
+                          <Link to="#">원큐브마케팅 기프팅 예매권</Link>
                         </li>
                       </ul>
                     </div>
@@ -826,11 +827,11 @@ export default function BookingDefault() {
               <h2 className="h-[100%] text-[17px] font-extrabold flex items-center ml-4">
                 STEP 3.
               </h2>
-              <a href="#" className="refresh mr-[12px] pr-[24px]">
+              <Link to="#" className="refresh mr-[12px] pr-[24px]">
                 <span className="text-[#e6e6e6] text-[12px] font-extrabold">
                   다시하기
                 </span>
-              </a>
+              </Link>
             </div>
             <div className="flex justify-between h-[43px] bg-[#dfded6] text-[#333]">
               <h4 className="h-[100%] text-[17px] font-extrabold flex items-center ml-4">
@@ -866,49 +867,49 @@ export default function BookingDefault() {
                           className="w-[100%] border-b border-[#d7d6cf]"
                           onClick={() => handleCouponClick("CJ ONE 포인트")}
                         >
-                          <a href="#">CJ ONE 포인트</a>
+                          <Link to="#">CJ ONE 포인트</Link>
                         </li>
                         <li
                           className="w-[100%] border-b border-[#d7d6cf]"
                           onClick={() => handleCouponClick("CJ 기프트카드")}
                         >
-                          <a href="#">CJ 기프트카드</a>
+                          <Link to="#">CJ 기프트카드</Link>
                         </li>
                         <li
                           className="w-[100%] border-b border-[#d7d6cf]"
                           onClick={() => handleCouponClick("CGV 기프트카드")}
                         >
-                          <a href="#">CGV 기프트카드</a>
+                          <Link to="#">CGV 기프트카드</Link>
                         </li>
                         <li
                           className="w-[100%] border-b border-[#d7d6cf]"
                           onClick={() => handleCouponClick("현대카드 M포인트")}
                         >
-                          <a href="#">현대카드 M포인트</a>
+                          <Link to="#">현대카드 M포인트</Link>
                         </li>
                         <li
                           className="w-[100%] border-b border-[#d7d6cf]"
                           onClick={() => handleCouponClick("신세계포인트")}
                         >
-                          <a href="#">신세계포인트</a>
+                          <Link to="#">신세계포인트</Link>
                         </li>
                         <li
                           className="w-[100%] border-b border-[#d7d6cf]"
                           onClick={() => handleCouponClick("삼성 U-Point")}
                         >
-                          <a href="#">삼성 U-Point</a>
+                          <Link to="#">삼성 U-Point</Link>
                         </li>
                         <li
                           className="w-[100%] border-b border-[#d7d6cf]"
                           onClick={() => handleCouponClick("우리WON꿀머니")}
                         >
-                          <a href="#">우리WON꿀머니</a>
+                          <Link to="#">우리WON꿀머니</Link>
                         </li>
                         <li
                           className="w-[100%] border-b border-[#d7d6cf]"
                           onClick={() => handleCouponClick("하나머니")}
                         >
-                          <a href="#">하나머니</a>
+                          <Link to="#">하나머니</Link>
                         </li>
                       </ul>
                     </div>
@@ -1524,11 +1525,11 @@ export default function BookingDefault() {
               <h2 className="h-[100%] text-[17px] font-extrabold flex items-center ml-4">
                 STEP 4. 최종결제수단
               </h2>
-              <a href="#" className="refresh mr-[12px] pr-[24px]">
+              <Link to="#" className="refresh mr-[12px] pr-[24px]">
                 <span className="text-[#e6e6e6] text-[12px] font-extrabold">
                   다시하기
                 </span>
-              </a>
+              </Link>
             </div>
 
             {/* body */}

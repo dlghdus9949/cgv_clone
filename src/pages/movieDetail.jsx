@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, NavLink } from "react-router-dom";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 export const IMG_BASE_URL = "https://image.tmdb.org/t/p/w500";
 
@@ -102,12 +103,12 @@ export default function MovieDetail() {
 
             {/* 광고 배너 */}
             <div className="banner flex justify-center bg-[#23114F] mb-32">
-              <a href="/">
+              <Link to="/">
                 <img
                   src={`${process.env.PUBLIC_URL}/image/banner.jpg`}
                   alt="banner"
                 />
-              </a>
+              </Link>
             </div>
           </div>
         </div>

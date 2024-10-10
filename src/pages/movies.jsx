@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import React from "react";
 import axios from "axios";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 export const IMG_BASE_URL = "https://image.tmdb.org/t/p/w500";
 
@@ -42,10 +42,10 @@ export default function Movies() {
               <div className="submenu">
                 <ul className="flex">
                   <li className="on mr-2">
-                    <a href="#">무비차트</a>
+                    <Link to="#">무비차트</Link>
                   </li>
                   <li>
-                    <a href="#">상영예정작</a>
+                    <Link to="#">상영예정작</Link>
                   </li>
                 </ul>
               </div>
