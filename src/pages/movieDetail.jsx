@@ -5,80 +5,35 @@ import axios from "axios";
 export const IMG_BASE_URL = "https://image.tmdb.org/t/p/w500";
 
 export default function MovieDetail() {
-  const { id } = useParams();
+  const { movieId } = useParams(); // URL에서 movieId를 가져옵니다.
   const [movie, setMovie] = useState({});
-  const [credits, setCredits] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const languageMap = {
-    en: "미국",
-    ko: "대한민국",
-    ja: "일본",
-    fr: "프랑스",
-    es: "스페인",
-    zh: "중국",
-    de: "독일",
-    it: "이탈리아",
-  };
-
-  // 장르 이름을 반환하는 함수
-  const getGenreNames = (genres) => {
-    if (!genres) return ""; // genres가 undefined일 경우 빈 문자열 반환
-    return genres.map((genre) => genre.name).join(", ");
-  };
-
+  // API 호출 코드
   useEffect(() => {
-    // API 호출 코드
     const fetchMovieDetail = async () => {
       try {
         const response = await axios.get(
-          `https://api.themoviedb.org/3/movie/${id}`,
-          {
-            params: { language: "ko-kr", page: "1" },
-            headers: {
-              accept: "application/json",
-              Authorization:
-                "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxYjU5MmMzNGIyMDU5NTVjZDM2M2YzMGRiYzM5YjljMiIsIm5iZiI6MTcyMDY3NDkyMy42NjIwNzUsInN1YiI6IjY2OGY2OGY3MmI3NWQ5MDIwZWU2ZWExOSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.fK5NfoFsZr7QM0m1mYQ2tiTkkbBpDO1R6Thm_W7CTX8", // 여기에 자신의 API 키를 입력하세요
-            },
-          }
+          `http://localhost:8080/movies/${movieId}`
         );
-        setMovie(response.data);
+
+        // API 응답이 MovieResponseDTO에 따라 구조화되어 있는지 확인 후 movie state 업데이트
+        if (response.status === 200) {
+          setMovie(response.data);
+        } else {
+          throw new Error("영화 정보를 불러오는 데 실패했습니다.");
+        }
       } catch (error) {
         console.error("영화 정보를 불러오지 못했습니다.", error);
         setError(error);
+      } finally {
+        setLoading(false);
       }
     };
 
-    // API 호출 코드
-    const fetchCredits = async () => {
-      try {
-        const response = await axios.get(
-          `https://api.themoviedb.org/3/movie/${id}/credits`,
-          {
-            params: { language: "ko-kr", page: "1" },
-            headers: {
-              accept: "application/json",
-              Authorization:
-                "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxYjU5MmMzNGIyMDU5NTVjZDM2M2YzMGRiYzM5YjljMiIsIm5iZiI6MTcyMDY3NDkyMy42NjIwNzUsInN1YiI6IjY2OGY2OGY3MmI3NWQ5MDIwZWU2ZWExOSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.fK5NfoFsZr7QM0m1mYQ2tiTkkbBpDO1R6Thm_W7CTX8",
-            },
-          }
-        );
-        setCredits(response.data);
-      } catch (error) {
-        console.error("출연진 정보를 불러오지 못했습니다.", error);
-        setError(error);
-      }
-    };
-
-    const fetchData = async () => {
-      setLoading(true);
-      await Promise.all([fetchMovieDetail(), fetchCredits()]);
-      setLoading(false);
-    };
-
-    fetchData();
-  }, [id]);
+    fetchMovieDetail();
+  }, [movieId]);
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
@@ -92,7 +47,7 @@ export default function MovieDetail() {
             <div className="detail_section pt-[40px] flex">
               <div className="imgbox">
                 <img
-                  src={`${IMG_BASE_URL}${movie.poster_path}`}
+                  src={`${IMG_BASE_URL}${movie.posterPath}`} // 응답 데이터에 맞게 변경
                   alt={movie.title}
                   className="w-[185px] h-[260px] object-cover shadow-xl"
                 />
@@ -107,22 +62,18 @@ export default function MovieDetail() {
                       평점 <span>{movie.vote_average}</span>
                     </span>
                     <span className="mt-1">
-                      {languageMap[movie.original_language] || "알 수 없음"}
+                      {/* original_language에 대한 데이터가 없으므로 제거 */}
+                      {/* {languageMap[movie.original_language] || "알 수 없음"} */}
                     </span>
                   </div>
                   <hr className="pb-4" />
                   <div className="flex flex-col text-[13px] font-bold">
                     <span>
-                      출연진:{" "}
-                      {credits.cast
-                        ?.slice(0, 5)
-                        .map((actor) => actor.name)
-                        .join(", ")}
-                    </span>
-                    <span>장르: {getGenreNames(movie.genres)}</span>
-                    <span>
-                      개봉 <span>{movie.release_date}</span>
-                    </span>
+                      개봉 <span>{movie.releaseDate}</span>
+                    </span>{" "}
+                    {/* 응답 데이터에 맞게 변경 */}
+                    <span>줄거리: {movie.overview}</span>{" "}
+                    {/* 응답 데이터에 맞게 변경 */}
                     <NavLink to={`/ticket`}>
                       <button className="bg-[#fb4357] text-white font-bold px-6 py-2 rounded w-32 mt-4">
                         예매하기
@@ -146,10 +97,6 @@ export default function MovieDetail() {
                   src={`${process.env.PUBLIC_URL}/image/bread_poster.jpg`}
                   alt=""
                 />
-                {/* <img
-                  src={`${process.env.PUBLIC_URL}/image/ad_poster.jpg`}
-                  alt=""
-                /> */}
               </div>
             </div>
 

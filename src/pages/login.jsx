@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useAuth } from "../AuthProvider";
 
@@ -11,6 +11,7 @@ export default function Login() {
   const [loading, setLoading] = useState(false); // 로딩 상태
 
   const { login } = useAuth();
+  const navigate = useNavigate(); // useNavigate 훅 사용
 
   // 탭 클릭 시 선택된 탭을 업데이트하는 함수
   const handleTabClick = (tab) => {
@@ -26,28 +27,34 @@ export default function Login() {
     };
 
     try {
+      setLoading(true); // 로딩 상태 활성화
       const response = await axios.post(
-        "http://localhost:8080/users/login",
+        "http://localhost:8080/users/login", // 로그인 API 경로
         loginData,
         {
-          withCredentials: true, // 크로스 도메인 요청 시 자격 증명 포함
           headers: {
             "Content-Type": "application/json", // 요청 본문 타입 설정
           },
         }
       );
 
-      console.log(response.data); // 응답 데이터 로그
-      const token = response.data.token; // 응답에서 토큰 추출 (필요 시)
-      localStorage.setItem("token", token); // 로컬 스토리지에 토큰 저장
-
-      alert("로그인 성공!"); // 성공 알림
+      const { success, token } = response.data; // 응답 데이터에서 성공 여부와 토큰 추출
+      if (success) {
+        localStorage.setItem("token", token); // 로컬 스토리지에 토큰 저장
+        login(); // 인증 상태 업데이트
+        alert("로그인 성공!"); // 성공 알림
+        navigate("/"); // 메인 페이지로 이동
+      } else {
+        setErrorMessage("로그인 실패. 아이디와 비밀번호를 확인해주세요."); // 실패 메시지
+      }
     } catch (error) {
       console.error(
         "로그인 오류:",
         error.response ? error.response.data : error.message
       ); // 오류 메시지 로그
-      setErrorMessage("로그인 실패. 아이디와 비밀번호를 확인해주세요."); // 사용자에게 표시할 오류 메시지
+      setErrorMessage("로그인 실패. 네트워크 또는 서버 오류입니다."); // 사용자에게 표시할 오류 메시지
+    } finally {
+      setLoading(false); // 로딩 상태 해제
     }
   };
 

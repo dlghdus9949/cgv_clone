@@ -1,6 +1,16 @@
-import { NavLink } from "react-router-dom";
+import React from "react";
+import { useAuth } from "../AuthProvider"; // AuthProvider 가져오기
+import { NavLink, useNavigate } from "react-router-dom";
 
-export default function Header({ isLoggedIn, onLogout }) {
+export default function Header() {
+  const { isLoggedIn, logout } = useAuth(); // 로그인 상태와 로그아웃 함수 가져오기
+  const navigate = useNavigate(); // navigate 훅 가져오기
+
+  const handleLogout = () => {
+    logout(); // 로그아웃 함수 호출
+    alert("로그아웃 되었습니다."); // 로그아웃 알림
+    navigate("/"); // 메인 화면으로 이동
+  };
   return (
     <div>
       {/* 배너 */}
@@ -42,14 +52,17 @@ export default function Header({ isLoggedIn, onLogout }) {
               </div>
               {!isLoggedIn ? ( // 로그인 여부에 따라 조건부 렌더링
                 <>
-                  <li className="flex flex-col text-center mr-[44px] justify-center">
-                    <a href="/login" className="flex justify-center">
+                  <li
+                    className="flex flex-col text-center mr-[44px] justify-center cursor-pointer"
+                    navigate="/login"
+                  >
+                    <NavLink to="/login" className="flex justify-center">
                       <img
                         src={`${process.env.PUBLIC_URL}/image/login.png`}
                         alt="로그인"
                         className="w-[36px]"
                       />
-                    </a>
+                    </NavLink>
                     <div className="text-[13px]">로그인</div>
                   </li>
                   <li className="flex flex-col text-center mr-[36px] justify-center">
@@ -77,14 +90,16 @@ export default function Header({ isLoggedIn, onLogout }) {
                 // 로그인한 경우
                 <>
                   <li className="flex flex-col text-center mr-[44px] justify-center">
-                    <a href="/login" className="flex justify-center">
-                      <img
-                        src={`${process.env.PUBLIC_URL}/image/login.png`}
-                        alt="로그인"
-                        className="w-[36px]"
-                      />
-                    </a>
-                    <div className="text-[13px]">로그아웃</div>
+                    <button onClick={handleLogout}>
+                      <a href="/login" className="flex justify-center">
+                        <img
+                          src={`${process.env.PUBLIC_URL}/image/login.png`}
+                          alt="로그아웃"
+                          className="w-[36px]"
+                        />
+                      </a>
+                      <div className="text-[13px]">로그아웃</div>
+                    </button>
                   </li>
                   <li className="flex flex-col text-center mr-[44px] justify-center">
                     <NavLink to="/my-page" className="flex justify-center">

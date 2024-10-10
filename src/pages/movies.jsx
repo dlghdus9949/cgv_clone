@@ -12,23 +12,18 @@ export default function Movies() {
   useEffect(() => {
     // API 호출 코드
     const fetchMovies = async () => {
-      const url = showNowPlaying
-        ? "https://api.themoviedb.org/3/movie/now_playing"
-        : "https://api.themoviedb.org/3/movie/popular";
+      const url = "http://localhost:8080/movies/popular"; // 수정된 API URL
       const options = {
         method: "GET",
         url: url,
-        params: { language: "ko-kr", page: "1" },
         headers: {
           accept: "application/json",
-          Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxYjU5MmMzNGIyMDU5NTVjZDM2M2YzMGRiYzM5YjljMiIsIm5iZiI6MTcyMDY3NDkyMy42NjIwNzUsInN1YiI6IjY2OGY2OGY3MmI3NWQ5MDIwZWU2ZWExOSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.fK5NfoFsZr7QM0m1mYQ2tiTkkbBpDO1R6Thm_W7CTX8",
         },
       };
 
       try {
         const response = await axios.request(options);
-        setMovies(response.data.results);
+        setMovies(response.data); // API의 응답이 배열 형식이므로 그대로 설정
       } catch (error) {
         console.error("API를 불러오지 못했습니다.", error);
       }
@@ -94,7 +89,7 @@ export default function Movies() {
               <div className="flex flex-col justify-center w-[996px]">
                 <div className="">
                   <div className="grid grid-cols-4 gap-16 mt-3 mb-8 w-[100%] mx-auto">
-                    {movies.slice(0, 52).map((movie, index) => (
+                    {movies.map((movie, index) => (
                       <div key={movie.id} className="h-fit mx-auto">
                         {/* No. 처리: 20위까지는 No. 표시 */}
                         {index < 20 ? (
@@ -109,7 +104,7 @@ export default function Movies() {
                         {/* 영화 포스터 이미지 */}
                         <NavLink to={`/movieDetail/${movie.id}`}>
                           <img
-                            src={`${IMG_BASE_URL}${movie.poster_path}`}
+                            src={`${IMG_BASE_URL}${movie.posterPath}`} // posterPath로 변경
                             alt={movie.title}
                             className="mt-2 w-[200px] h-[290px]"
                           />
@@ -120,9 +115,10 @@ export default function Movies() {
                             {movie.title}
                           </div>
                           <div className="flex justify-between mt-2 w-[95%] mx-auto">
-                            <div className="text-xs">{movie.release_date}</div>
+                            <div className="text-xs">{movie.releaseDate}</div>
                             <div className="text-xs flex items-center">
-                              {movie.vote_average.toFixed(1)} ★
+                              {/* vote_average가 undefined일 경우 0으로 설정 */}
+                              {(movie.vote_average ?? 0).toFixed(1)} ★
                             </div>
                           </div>
                           <div className="flex justify-between mt-2">
@@ -130,7 +126,8 @@ export default function Movies() {
                               예매율: {(Math.random() * 60 + 1).toFixed(1)}%
                             </div>
                             <div className="text-sm">
-                              ★ {movie.vote_average}
+                              ★ {movie.vote_average ?? "N/A"}{" "}
+                              {/* vote_average가 없을 경우 'N/A'로 표시 */}
                             </div>
                           </div>
                           <NavLink to={`/ticket`}>

@@ -118,12 +118,9 @@ export default function Join() {
     const birth_date = `${birthYear}-${birthMonth}-${birthDay}`;
 
     try {
-      const response = await fetch("http://localhost:8080/users/signup", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
+      const response = await axios.post(
+        "http://localhost:8080/users/register",
+        {
           id: id,
           user_name: name,
           password: pw,
@@ -131,18 +128,35 @@ export default function Join() {
           phone_number: phone,
           birth_date: birth_date,
           gender: gender,
-        }),
-      });
+        },
+        {
+          withCredentials: true,
+        }
+      );
 
-      if (response.ok) {
+      if (response.status === 200) {
         // 성공적으로 회원가입 시 처리 (예: 페이지 이동)
         navigate("/login");
       } else {
-        const errorData = await response.json();
-        console.error("회원가입 실패:", errorData);
+        console.error("회원가입 실패:", response.data);
       }
     } catch (error) {
-      console.error("회원가입 요청 중 오류 발생:", error);
+      if (error.response && error.response.data) {
+        const errorMessage = error.response.data.message; // 서버가 반환하는 에러 메시지
+        console.error("회원가입 오류 발생:", errorMessage);
+
+        // 에러 메시지에 따른 사용자에게 보여줄 메시지 설정
+        if (errorMessage.includes("이미 존재하는 이름")) {
+          setNameMessage("이미 존재하는 이름입니다. 다른 이름을 사용해주세요.");
+          setIsName(false);
+        } else if (errorMessage.includes("이미 존재하는 ID")) {
+          setIdMessage("이미 존재하는 ID입니다. 다른 ID를 사용해주세요.");
+          setIsId(false);
+        }
+        // 다른 에러 메시지에 대한 처리 추가 가능
+      } else {
+        console.error("회원가입 요청 중 오류 발생:", error);
+      }
     }
   };
 
